@@ -60,7 +60,8 @@ namespace WebApplication1.Controllers
                     customerMaster.emailid = reader.GetString("emailid");
                     customerMaster.isactive = reader.GetString("isactive");
                     customerMaster.segment = reader.GetString("segment");
-
+                    customerMaster.customercin = reader.GetString("customer_cin");
+                    customerMaster.plantdesc = reader.GetString("plantdesc");
 
                     customermasterList.Add(customerMaster);
 
@@ -111,7 +112,8 @@ namespace WebApplication1.Controllers
                     customerMaster.emailid = reader.GetString("emailid");
                     customerMaster.isactive = reader.GetString("isactive");
                     customerMaster.segment = reader.GetString("segment");
-
+                    customerMaster.customercin = reader.GetString("customer_cin");
+                    customerMaster.plantdesc = reader.GetString("plantdesc");
 
                     customermasterList.Add(customerMaster);
 
@@ -163,7 +165,8 @@ namespace WebApplication1.Controllers
                     customerMaster.emailid = reader.GetString("emailid");
                     customerMaster.isactive = reader.GetString("isactive");
                     customerMaster.segment = reader.GetString("segment");
-
+                    customerMaster.customercin = reader.GetString("customer_cin");
+                    customerMaster.plantdesc = reader.GetString("plantdesc");
 
                     customermasterList.Add(customerMaster);
 

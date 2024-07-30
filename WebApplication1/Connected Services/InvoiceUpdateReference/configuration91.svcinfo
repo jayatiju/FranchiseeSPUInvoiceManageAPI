@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="IVebYDhmdEQGY43Ha7neMoSl9cIMUhAjwUCl/hP3rkI=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="vUyl4p1U1aYl2Kp9KfrHKG+qH9EdqVZAW8jWDAHDCkQ=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="customBinding" name="postlist">
+    <bindingConfiguration bindingType="customBinding" name="postlist1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>postlist</serializedValue>
+          <serializedValue>postlist1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -161,10 +161,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="customBinding" name="postlist_soap12">
+    <bindingConfiguration bindingType="customBinding" name="postlist_soap121">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>postlist_soap12</serializedValue>
+          <serializedValue>postlist_soap121</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -323,10 +323,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="postlist" contract="InvoiceUpdateReference.ZWS_SPU_INVOICE_POST_SRV" bindingType="customBinding" address="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_invoice_post_srv/500/invoiceupdate/postlist" bindingConfiguration="postlist">
+    <endpoint name="postlist1" contract="InvoiceUpdateReference.ZWS_SPU_INVOICE_POST_SRV" bindingType="customBinding" address="https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_invoice_post_srv/500/invoiceupdate/postlist" bindingConfiguration="postlist1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_invoice_post_srv/500/invoiceupdate/postlist</serializedValue>
+          <serializedValue>https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_invoice_post_srv/500/invoiceupdate/postlist</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -335,7 +335,7 @@
           <serializedValue>customBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>postlist</serializedValue>
+          <serializedValue>postlist1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>InvoiceUpdateReference.ZWS_SPU_INVOICE_POST_SRV</serializedValue>
@@ -398,7 +398,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>postlist</serializedValue>
+          <serializedValue>postlist1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -408,10 +408,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="postlist_soap12" contract="InvoiceUpdateReference.ZWS_SPU_INVOICE_POST_SRV" bindingType="customBinding" address="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_invoice_post_srv/500/invoiceupdate/postlist" bindingConfiguration="postlist_soap12">
+    <endpoint name="postlist_soap121" contract="InvoiceUpdateReference.ZWS_SPU_INVOICE_POST_SRV" bindingType="customBinding" address="https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_invoice_post_srv/500/invoiceupdate/postlist" bindingConfiguration="postlist_soap121">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_invoice_post_srv/500/invoiceupdate/postlist</serializedValue>
+          <serializedValue>https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_invoice_post_srv/500/invoiceupdate/postlist</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -420,7 +420,7 @@
           <serializedValue>customBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>postlist_soap12</serializedValue>
+          <serializedValue>postlist_soap121</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>InvoiceUpdateReference.ZWS_SPU_INVOICE_POST_SRV</serializedValue>
@@ -483,7 +483,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>postlist_soap12</serializedValue>
+          <serializedValue>postlist_soap121</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

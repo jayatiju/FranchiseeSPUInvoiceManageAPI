@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="urn:sap-com:document:sap:rfc:functions" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" targetNamespace="urn:sap-com:document:sap:rfc:functions" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsoap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:n1="urn:sap-com:document:sap:rfc:functions" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:documentation>
     <sidl:sidl xmlns:sidl="http://www.sap.com/2007/03/sidl" />
   </wsdl:documentation>
   <wsp:UsingPolicy wsdl:required="true" />
-  <wsp:Policy wsu:Id="BN__list">
+  <wsp:Policy wsu:Id="BN__invoices">
     <wsp:ExactlyOne>
       <wsp:All>
         <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="true" />
@@ -68,7 +68,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="BN__list_soap12">
+  <wsp:Policy wsu:Id="BN__invoices_soap12">
     <wsp:ExactlyOne>
       <wsp:All>
         <wsaw:UsingAddressing xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" wsp:Optional="true" />
@@ -132,7 +132,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="IF__ZWS_SPU_CUSTOMER_LIST_SRV">
+  <wsp:Policy wsu:Id="IF__ZWS_SPU_PUR_SRV">
     <wsp:ExactlyOne>
       <wsp:All>
         <sapsession:Session xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
@@ -144,7 +144,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OP__ZFM_SPU_CUSTOMERS">
+  <wsp:Policy wsu:Id="OP__ZfmSpuPur">
     <wsp:ExactlyOne>
       <wsp:All>
         <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
@@ -155,15 +155,10 @@
     </wsp:ExactlyOne>
   </wsp:Policy>
   <wsdl:types>
-    <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
+    <xsd:schema xmlns:tns="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
       <xsd:simpleType name="char10">
         <xsd:restriction base="xsd:string">
           <xsd:maxLength value="10" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char16">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="16" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:simpleType name="char18">
@@ -171,24 +166,19 @@
           <xsd:maxLength value="18" />
         </xsd:restriction>
       </xsd:simpleType>
-      <xsd:simpleType name="char20">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="20" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char241">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="241" />
-        </xsd:restriction>
-      </xsd:simpleType>
       <xsd:simpleType name="char3">
         <xsd:restriction base="xsd:string">
           <xsd:maxLength value="3" />
         </xsd:restriction>
       </xsd:simpleType>
-      <xsd:simpleType name="char35">
+      <xsd:simpleType name="char4">
         <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="35" />
+          <xsd:maxLength value="4" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char40">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="40" />
         </xsd:restriction>
       </xsd:simpleType>
       <xsd:simpleType name="char50">
@@ -196,65 +186,149 @@
           <xsd:maxLength value="50" />
         </xsd:restriction>
       </xsd:simpleType>
-      <xsd:complexType name="ZSPU_CUST_STR">
+      <xsd:simpleType name="date10">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="10" />
+          <xsd:pattern value="\d\d\d\d-\d\d-\d\d" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="numeric4">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="4" />
+          <xsd:pattern value="\d*" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="string">
+        <xsd:restriction base="xsd:string" />
+      </xsd:simpleType>
+    </xsd:schema>
+    <xsd:schema xmlns:n0="urn:sap-com:document:sap:rfc:functions" attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:soap:functions:mc-style">
+      <xsd:import namespace="urn:sap-com:document:sap:rfc:functions" />
+      <xsd:simpleType name="char16">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="16" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char20">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="20" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="ZspuPurStr">
         <xsd:sequence>
-          <xsd:element name="BRANCHCODE" type="tns:char10" />
-          <xsd:element name="BRANCHNAME" type="tns:char35" />
-          <xsd:element name="GSTINNUM" type="tns:char18" />
-          <xsd:element name="ADDRESS" type="tns:char50" />
-          <xsd:element name="PINCODE" type="tns:char10" />
-          <xsd:element name="REGIONCODE" type="tns:char3" />
-          <xsd:element name="REGIONDESC" type="tns:char20" />
-          <xsd:element name="PAN" type="tns:char10" />
-          <xsd:element name="MOBILENO" type="tns:char16" />
-          <xsd:element name="SEGMENT" type="tns:char10" />
-          <xsd:element name="EMAILID" type="tns:char241" />
+          <xsd:element name="Segment" type="n0:char10" />
+          <xsd:element name="Region" type="n0:char3" />
+          <xsd:element name="Plant" type="n0:char4" />
+          <xsd:element name="Fy" type="n0:string" />
+          <xsd:element name="Gstin" type="n0:char18" />
+          <xsd:element name="Document" type="n0:string" />
+          <xsd:element name="DocDate" type="n0:string" />
+          <xsd:element name="PostDate" type="n0:string" />
+          <xsd:element name="SalesDoc" type="n0:string" />
+          <xsd:element name="ShipToParty" type="n0:string" />
+          <xsd:element name="ShipToPartyName" type="n0:string" />
+          <xsd:element name="Pincode" type="n0:string" />
+          <xsd:element name="City" type="n0:string" />
+          <xsd:element name="Street2" type="n0:string" />
+          <xsd:element name="Street" type="n0:string" />
+          <xsd:element name="Street3" type="n0:string" />
+          <xsd:element name="Mobileno" type="tns:char16" />
+          <xsd:element name="StpartyRegion" type="n0:char3" />
+          <xsd:element name="StpartyRegiondesc" type="tns:char20" />
+          <xsd:element name="Vendor" type="n0:string" />
+          <xsd:element name="VendorName" type="n0:string" />
+          <xsd:element name="SpuNo" type="n0:string" />
+          <xsd:element name="CrmTicket" type="n0:string" />
+          <xsd:element name="MachStat" type="n0:string" />
+          <xsd:element name="Cogs" type="n0:string" />
+          <xsd:element name="Material" type="n0:string" />
+          <xsd:element name="MaterialGrp" type="n0:string" />
+          <xsd:element name="MatDes" type="n0:string" />
+          <xsd:element name="Hsn" type="n0:string" />
+          <xsd:element name="Taxpercent" type="n0:string" />
+          <xsd:element name="Quantity" type="n0:string" />
+          <xsd:element name="Unit" type="n0:string" />
+          <xsd:element name="Spare" type="n0:string" />
+          <xsd:element name="_--3455061hFrPurAcnt" type="n0:string" />
+          <xsd:element name="_--3455061sFrPurAcnt" type="n0:string" />
+          <xsd:element name="_--3455031FrEwExpn" type="n0:string" />
+          <xsd:element name="_--3455021FrAmcExpn" type="n0:string" />
+          <xsd:element name="_--3455041FrWtyExpn" type="n0:string" />
+          <xsd:element name="_--3455011DlrMchCost" type="n0:string" />
+          <xsd:element name="Currency" type="n0:string" />
+          <xsd:element name="Assignment" type="n0:string" />
+          <xsd:element name="TaxCode" type="n0:string" />
+          <xsd:element name="CgstPer" type="n0:string" />
+          <xsd:element name="CgstRcm" type="n0:string" />
+          <xsd:element name="Cgst" type="n0:string" />
+          <xsd:element name="IgstPer" type="n0:string" />
+          <xsd:element name="Igst" type="n0:string" />
+          <xsd:element name="ImportIgst" type="n0:string" />
+          <xsd:element name="IgstRcm" type="n0:string" />
+          <xsd:element name="SgstPer" type="n0:string" />
+          <xsd:element name="Sgst" type="n0:string" />
+          <xsd:element name="UgstPer" type="n0:string" />
+          <xsd:element name="Ugst" type="n0:string" />
+          <xsd:element name="UgstRcm" type="n0:string" />
+          <xsd:element name="SgstRcm" type="n0:string" />
+          <xsd:element name="Nad" type="n0:string" />
+          <xsd:element name="Invoice" type="n0:string" />
+          <xsd:element name="ZzproductId" type="n0:char40" />
+          <xsd:element name="ZzproductDesc" type="n0:char40" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="ZSPU_CUST_TT">
+      <xsd:complexType name="ZspuPurTt">
         <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZSPU_CUST_STR" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZspuPurStr" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:element name="ZFM_SPU_CUSTOMERS">
-        <xsd:complexType>
-          <xsd:sequence />
-        </xsd:complexType>
-      </xsd:element>
-      <xsd:element name="ZFM_SPU_CUSTOMERSResponse">
+      <xsd:element name="ZfmSpuPur">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="CUSTOMERS" type="tns:ZSPU_CUST_TT" />
+            <xsd:element name="CompanyCode" type="n0:char4" />
+            <xsd:element minOccurs="0" name="DocumentNumber" type="n0:char10" />
+            <xsd:element name="EndDate" type="n0:date10" />
+            <xsd:element name="FiscalYear" type="n0:numeric4" />
+            <xsd:element minOccurs="0" name="SegmentCode" type="n0:char10" />
+            <xsd:element name="StartDate" type="n0:date10" />
+          </xsd:sequence>
+        </xsd:complexType>
+      </xsd:element>
+      <xsd:element name="ZfmSpuPurResponse">
+        <xsd:complexType>
+          <xsd:sequence>
+            <xsd:element name="EtSpu" type="tns:ZspuPurTt" />
+            <xsd:element name="EvMsg" type="n0:char50" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ZFM_SPU_CUSTOMERS">
-    <wsdl:part name="parameters" element="tns:ZFM_SPU_CUSTOMERS" />
+  <wsdl:message name="ZfmSpuPur">
+    <wsdl:part name="parameters" element="tns:ZfmSpuPur" />
   </wsdl:message>
-  <wsdl:message name="ZFM_SPU_CUSTOMERSResponse">
-    <wsdl:part name="parameter" element="tns:ZFM_SPU_CUSTOMERSResponse" />
+  <wsdl:message name="ZfmSpuPurResponse">
+    <wsdl:part name="parameter" element="tns:ZfmSpuPurResponse" />
   </wsdl:message>
-  <wsdl:portType name="ZWS_SPU_CUSTOMER_LIST_SRV">
+  <wsdl:portType name="ZWS_SPU_PUR_SRV">
     <wsp:Policy>
-      <wsp:PolicyReference URI="#IF__ZWS_SPU_CUSTOMER_LIST_SRV" />
+      <wsp:PolicyReference URI="#IF__ZWS_SPU_PUR_SRV" />
     </wsp:Policy>
-    <wsdl:operation name="ZFM_SPU_CUSTOMERS">
+    <wsdl:operation name="ZfmSpuPur">
       <wsp:Policy>
-        <wsp:PolicyReference URI="#OP__ZFM_SPU_CUSTOMERS" />
+        <wsp:PolicyReference URI="#OP__ZfmSpuPur" />
       </wsp:Policy>
-      <wsdl:input message="tns:ZFM_SPU_CUSTOMERS" />
-      <wsdl:output message="tns:ZFM_SPU_CUSTOMERSResponse" />
+      <wsdl:input message="tns:ZfmSpuPur" />
+      <wsdl:output message="tns:ZfmSpuPurResponse" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="list" type="tns:ZWS_SPU_CUSTOMER_LIST_SRV">
+  <wsdl:binding name="invoices" type="tns:ZWS_SPU_PUR_SRV">
     <wsp:Policy>
-      <wsp:PolicyReference URI="#BN__list" />
+      <wsp:PolicyReference URI="#BN__invoices" />
     </wsp:Policy>
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="ZFM_SPU_CUSTOMERS">
-      <soap:operation soapAction="urn:sap-com:document:sap:rfc:functions:ZWS_SPU_CUSTOMER_LIST_SRV:ZFM_SPU_CUSTOMERSRequest" style="document" />
+    <wsdl:operation name="ZfmSpuPur">
+      <soap:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZWS_SPU_PUR_SRV:ZfmSpuPurRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -263,13 +337,13 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="list_soap12" type="tns:ZWS_SPU_CUSTOMER_LIST_SRV">
+  <wsdl:binding name="invoices_soap12" type="tns:ZWS_SPU_PUR_SRV">
     <wsp:Policy>
-      <wsp:PolicyReference URI="#BN__list_soap12" />
+      <wsp:PolicyReference URI="#BN__invoices_soap12" />
     </wsp:Policy>
     <wsoap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="ZFM_SPU_CUSTOMERS">
-      <wsoap12:operation soapAction="urn:sap-com:document:sap:rfc:functions:ZWS_SPU_CUSTOMER_LIST_SRV:ZFM_SPU_CUSTOMERSRequest" style="document" />
+    <wsdl:operation name="ZfmSpuPur">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:soap:functions:mc-style:ZWS_SPU_PUR_SRV:ZfmSpuPurRequest" style="document" />
       <wsdl:input>
         <wsoap12:body use="literal" />
       </wsdl:input>
@@ -278,12 +352,12 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="ZCUSTOMERS">
-    <wsdl:port name="list" binding="tns:list">
-      <soap:address location="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_customer_list_srv/500/zcustomers/list" />
+  <wsdl:service name="zws_spu_invoices">
+    <wsdl:port name="invoices" binding="tns:invoices">
+      <soap:address location="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices" />
     </wsdl:port>
-    <wsdl:port name="list_soap12" binding="tns:list_soap12">
-      <wsoap12:address location="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_customer_list_srv/500/zcustomers/list" />
+    <wsdl:port name="invoices_soap12" binding="tns:invoices_soap12">
+      <wsoap12:address location="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

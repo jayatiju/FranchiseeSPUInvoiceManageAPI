@@ -37,11 +37,12 @@ namespace WebApplication1.Controllers
             try
             {
                 //deactivate user
-                string sql = "UPDATE user_table SET isactive = '' WHERE email = @email;";
+                string sql = "UPDATE user_table SET isactive = '', deactivationreason = @deactivationreason WHERE email = @email;";
                 using (var command = new MySqlCommand(sql, _connection))
                 {
 
                     command.Parameters.AddWithValue("@email", deactivation.email);
+                    command.Parameters.AddWithValue("@deactivationreason", deactivation.deactivationreason);
 
 
                     var reader = command.ExecuteReader();

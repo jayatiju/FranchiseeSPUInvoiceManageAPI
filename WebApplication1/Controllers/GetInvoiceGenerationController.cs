@@ -70,6 +70,7 @@ namespace WebApplication1.Controllers
                     invoiceGenerationOutput.SGST = reader.GetString("SGST");
                     invoiceGenerationOutput.CGST = reader.GetString("CGST");
                     invoiceGenerationOutput.IGST = reader.GetString("IGST");
+                    invoiceGenerationOutput.UGST = reader.GetString("UGST");
                     invoiceGenerationOutput.RoundOff = reader.GetString("RoundOff");
                     invoiceGenerationOutput.GrandTotal = reader.GetString("GrandTotal");
                     invoiceGenerationOutput.InvoiceNumberStatus = reader.GetString("InvoiceNumberStatus");
@@ -79,9 +80,14 @@ namespace WebApplication1.Controllers
                     invoiceGenerationOutput.regionCode = reader.GetString("regionCode");
                     invoiceGenerationOutput.segmentCode = reader.GetString("segmentCode");
 
+                    invoiceGenerationOutput.InvoicePdfDuplicateStatus = reader.GetString("InvoicePdfDuplicateStatus");
+                    invoiceGenerationOutput.InvoicePdfDuplicateLocation = reader.GetString("InvoicePdfDuplicateLocation");
 
+                    invoiceGenerationOutput.InvoicePdfTriplicateStatus = reader.GetString("InvoicePdfTriplicateStatus");
+                    invoiceGenerationOutput.InvoicePdfTriplicateLocation = reader.GetString("InvoicePdfTriplicateLocation");
 
-
+                    invoiceGenerationOutput.branchGSTIN = reader.GetString("branchgstin");
+                    invoiceGenerationOutput.shiptopartyaddress = reader.GetString("shiptopartyaddress");
 
 
                     listInvoiceGenerationOutputs.Add(invoiceGenerationOutput);
@@ -139,6 +145,7 @@ namespace WebApplication1.Controllers
                     invoiceGenerationOutput.SGST = reader.GetString("SGST");
                     invoiceGenerationOutput.CGST = reader.GetString("CGST");
                     invoiceGenerationOutput.IGST = reader.GetString("IGST");
+                    invoiceGenerationOutput.UGST = reader.GetString("UGST");
                     invoiceGenerationOutput.RoundOff = reader.GetString("RoundOff");
                     invoiceGenerationOutput.GrandTotal = reader.GetString("GrandTotal");
                     invoiceGenerationOutput.InvoiceNumberStatus = reader.GetString("InvoiceNumberStatus");
@@ -147,6 +154,15 @@ namespace WebApplication1.Controllers
                     invoiceGenerationOutput.InvoicePdfLocation = reader.GetString("InvoicePdfLocation");
                     invoiceGenerationOutput.regionCode = reader.GetString("regionCode");
                     invoiceGenerationOutput.segmentCode = reader.GetString("segmentCode");
+
+                    invoiceGenerationOutput.InvoicePdfDuplicateStatus = reader.GetString("InvoicePdfDuplicateStatus");
+                    invoiceGenerationOutput.InvoicePdfDuplicateLocation = reader.GetString("InvoicePdfDuplicateLocation");
+
+                    invoiceGenerationOutput.InvoicePdfTriplicateStatus = reader.GetString("InvoicePdfTriplicateStatus");
+                    invoiceGenerationOutput.InvoicePdfTriplicateLocation = reader.GetString("InvoicePdfTriplicateLocation");
+
+                    invoiceGenerationOutput.branchGSTIN = reader.GetString("branchgstin");
+                    invoiceGenerationOutput.shiptopartyaddress = reader.GetString("shiptopartyaddress");
 
                     listInvoiceGenerationOutputs.Add(invoiceGenerationOutput);
                 }
@@ -203,6 +219,7 @@ namespace WebApplication1.Controllers
                     invoiceGenerationOutput.SGST = reader.GetString("SGST");
                     invoiceGenerationOutput.CGST = reader.GetString("CGST");
                     invoiceGenerationOutput.IGST = reader.GetString("IGST");
+                    invoiceGenerationOutput.UGST = reader.GetString("UGST");
                     invoiceGenerationOutput.RoundOff = reader.GetString("RoundOff");
                     invoiceGenerationOutput.GrandTotal = reader.GetString("GrandTotal");
                     invoiceGenerationOutput.InvoiceNumberStatus = reader.GetString("InvoiceNumberStatus");
@@ -212,7 +229,14 @@ namespace WebApplication1.Controllers
                     invoiceGenerationOutput.regionCode = reader.GetString("regionCode");
                     invoiceGenerationOutput.segmentCode = reader.GetString("segmentCode");
 
+                    invoiceGenerationOutput.InvoicePdfDuplicateStatus = reader.GetString("InvoicePdfDuplicateStatus");
+                    invoiceGenerationOutput.InvoicePdfDuplicateLocation = reader.GetString("InvoicePdfDuplicateLocation");
 
+                    invoiceGenerationOutput.InvoicePdfTriplicateStatus = reader.GetString("InvoicePdfTriplicateStatus");
+                    invoiceGenerationOutput.InvoicePdfTriplicateLocation = reader.GetString("InvoicePdfTriplicateLocation");
+
+                    invoiceGenerationOutput.branchGSTIN = reader.GetString("branchgstin");
+                    invoiceGenerationOutput.shiptopartyaddress = reader.GetString("shiptopartyaddress");
 
 
 
@@ -273,6 +297,7 @@ namespace WebApplication1.Controllers
                     invoiceGenerationOutput.SGST = reader.GetString("SGST");
                     invoiceGenerationOutput.CGST = reader.GetString("CGST");
                     invoiceGenerationOutput.IGST = reader.GetString("IGST");
+                    invoiceGenerationOutput.UGST = reader.GetString("UGST");
                     invoiceGenerationOutput.RoundOff = reader.GetString("RoundOff");
                     invoiceGenerationOutput.GrandTotal = reader.GetString("GrandTotal");
                     invoiceGenerationOutput.InvoiceNumberStatus = reader.GetString("InvoiceNumberStatus");
@@ -281,6 +306,15 @@ namespace WebApplication1.Controllers
                     invoiceGenerationOutput.InvoicePdfLocation = reader.GetString("InvoicePdfLocation");
                     invoiceGenerationOutput.regionCode = reader.GetString("regionCode");
                     invoiceGenerationOutput.segmentCode = reader.GetString("segmentCode");
+
+                    invoiceGenerationOutput.InvoicePdfDuplicateStatus = reader.GetString("InvoicePdfDuplicateStatus");
+                    invoiceGenerationOutput.InvoicePdfDuplicateLocation = reader.GetString("InvoicePdfDuplicateLocation");
+
+                    invoiceGenerationOutput.InvoicePdfTriplicateStatus = reader.GetString("InvoicePdfTriplicateStatus");
+                    invoiceGenerationOutput.InvoicePdfTriplicateLocation = reader.GetString("InvoicePdfTriplicateLocation");
+
+                    invoiceGenerationOutput.branchGSTIN = reader.GetString("branchgstin");
+                    invoiceGenerationOutput.shiptopartyaddress = reader.GetString("shiptopartyaddress");
 
                     listInvoiceGenerationOutputs.Add(invoiceGenerationOutput);
                 }

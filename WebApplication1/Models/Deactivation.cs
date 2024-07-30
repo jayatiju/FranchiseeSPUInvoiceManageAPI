@@ -14,5 +14,7 @@ namespace WebApplication1.Models
         public string vendorcode { get; set; }
 
         public string materialcode { get; set; }
+
+        public string deactivationreason { get; set; }
     }
 }

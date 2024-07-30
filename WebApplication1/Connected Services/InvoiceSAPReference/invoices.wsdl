@@ -354,10 +354,10 @@
   </wsdl:binding>
   <wsdl:service name="zws_spu_invoices">
     <wsdl:port name="invoices" binding="tns:invoices">
-      <soap:address location="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices" />
+      <soap:address location="https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices" />
     </wsdl:port>
     <wsdl:port name="invoices_soap12" binding="tns:invoices_soap12">
-      <wsoap12:address location="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices" />
+      <wsoap12:address location="https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

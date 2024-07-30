@@ -13,7 +13,7 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 using WebApplication1.InvoiceUpdateReference;
-
+using System.Globalization;
 
 namespace WebApplication1.Controllers
 {
@@ -51,7 +51,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                string statusSql = "UPDATE invoice_monthly_status SET Invoice_Number_Generation_Flag = 'IP', Segment = @Segment  WHERE Month_Year = @Month_Year;";
+                string statusSql = "UPDATE invoice_monthly_status SET Invoice_Number_Generation_Flag = 'IP' WHERE Month_Year = @Month_Year AND Segment = @Segment ;";
                 string monthYear = convertToMonthYear(invoiceGenerationInput.startDate);
                 using (var statuscommand = new MySqlCommand(statusSql, _connection))
                 {
@@ -65,11 +65,22 @@ namespace WebApplication1.Controllers
                 }
 
 
+                List<vendorCounter> listVendorCounter = new List<vendorCounter>();
                 string getCounter = "select * from counter";
                 MySqlCommand sqlCommand = new MySqlCommand(getCounter, _connection);
                 MySqlDataReader counterReader = sqlCommand.ExecuteReader();
-                counterReader.Read();
+                /*counterReader.Read();
                 serialNumber = counterReader.GetInt32("serialCounter");
+                counterReader.Close();*/
+
+                while (counterReader.Read())
+                {
+                    vendorCounter iVendorCounter = new vendorCounter();
+
+                    iVendorCounter.vendorcode = counterReader.GetString("VendorCode");
+                    iVendorCounter.counter = counterReader.GetInt32("serialCounter");
+                    listVendorCounter.Add(iVendorCounter);
+                }
                 counterReader.Close();
 
                 List<InvoiceGenerationOutput> listOutput = new List<InvoiceGenerationOutput>();
@@ -77,7 +88,7 @@ namespace WebApplication1.Controllers
 
 
 
-                string sql = "SELECT MAX(Document_Posting_Date) AS InvoiceDate, MAX(Spu_Number) AS SPUNumber, MAX(CRM_Ticket_Number) AS CRMTicketNumber, Document_Number AS DocumentNumber, MAX(Document_Date) AS DocumentDate, MAX(Vendor_Name) AS VendorName, MAX(Vendor_Code) AS VendorCode, MAX(Plant_Code) AS CustomerCode, MAX(Ship_To_Party_Number) AS ShipToPartyNumber, MAX(Ship_To_Party_Name) AS ShipToPartyName, SUM(Spare_Value) AS Sub_Total, SUM(SGST) AS Total_SGST, SUM(CGST) AS Total_CGST, SUM(IGST) AS Total_IGST, MAX(branchname) AS branchname,  MAX(Region_Code) AS regionCode, MAX(invoice_master_table.Segment) AS segmentCode FROM invoice_master_table LEFT OUTER JOIN customer_master_table ON invoice_master_table.Plant_Code =  customer_master_table.branchcode WHERE Document_Date >= @startDate AND Document_Date <= @endDate AND invoice_master_table.Segment = @segment GROUP BY(Document_Number);";
+                string sql = "SELECT MAX(Document_Posting_Date) AS InvoiceDate, MAX(Spu_Number) AS SPUNumber, MAX(CRM_Ticket_Number) AS CRMTicketNumber, Document_Number AS DocumentNumber, MAX(Document_Date) AS DocumentDate, MAX(Vendor_Name) AS VendorName, MAX(Vendor_Code) AS VendorCode, MAX(Plant_Code) AS CustomerCode, MAX(Ship_To_Party_Number) AS ShipToPartyNumber, MAX(Ship_To_Party_Name) AS ShipToPartyName, SUM(Spare_Value) AS Sub_Total, SUM(SGST) AS Total_SGST, SUM(CGST) AS Total_CGST, SUM(IGST) AS Total_IGST,SUM(UGST) AS Total_UGST, MAX(branchname) AS branchname,  MAX(Region_Code) AS regionCode, MAX(invoice_master_table.Segment) AS segmentCode, MAX(invoice_master_table.GSTIN) as branchGSTIN, MAX(CONCAT(Address_1, Address_2, Address_3)) as ShipToPartyAddress FROM invoice_master_table LEFT OUTER JOIN customer_master_table ON invoice_master_table.Plant_Code =  customer_master_table.branchcode WHERE Document_Date >= @startDate AND Document_Date <= @endDate AND invoice_master_table.Segment = @segment GROUP BY(Document_Number);";
                 MySqlCommand command = new MySqlCommand(sql, _connection);
                 command.Parameters.AddWithValue("@startDate", invoiceGenerationInput.startDate);
                 command.Parameters.AddWithValue("@endDate", invoiceGenerationInput.endDate);
@@ -105,16 +116,40 @@ namespace WebApplication1.Controllers
                     invoiceGenerationOutput.SGST = reader.GetString("Total_SGST");
                     invoiceGenerationOutput.CGST = reader.GetString("Total_CGST");
                     invoiceGenerationOutput.IGST = reader.GetString("Total_IGST");
+                    invoiceGenerationOutput.UGST = reader.GetString("Total_UGST");
                     invoiceGenerationOutput.CustomerName = reader.GetString("branchname");
                     invoiceGenerationOutput.regionCode = reader.GetString("regionCode");
                     invoiceGenerationOutput.segmentCode = reader.GetString("segmentCode");
+                    invoiceGenerationOutput.branchGSTIN = reader.GetString("branchGSTIN");
+                    invoiceGenerationOutput.shiptopartyaddress = reader.GetString("ShipToPartyAddress");
 
-                    invoiceGenerationOutput.InvoiceNumber = invoiceNumberGeneration(invoiceGenerationOutput.VendorCode);
+                    int serialNum =0;
+                    for (var i = 0; i < listVendorCounter.Count; i++)
+                    {
+                        if (listVendorCounter[i].vendorcode == invoiceGenerationOutput.VendorCode)
+                        {
+                            serialNum = listVendorCounter[i].counter;
+                            invoiceGenerationOutput.InvoiceNumber = invoiceNumberGeneration(invoiceGenerationOutput.VendorCode, serialNum, invoiceGenerationOutput.DocumentDate);
+
+                            if (serialNum == 99999)
+                            {
+                                listVendorCounter[i].counter = 1;
+                            }
+                            else
+                            {
+                                listVendorCounter[i].counter = ++serialNum;
+                            }
+
+                        }
+                    }
+
+                   // invoiceGenerationOutput.InvoiceNumber = invoiceNumberGeneration(invoiceGenerationOutput.VendorCode, serialNum);
 
                     double sum = Convert.ToDouble(invoiceGenerationOutput.SubTotal) +
                                  Convert.ToDouble(invoiceGenerationOutput.SGST) +
                                  Convert.ToDouble(invoiceGenerationOutput.CGST) +
-                                 Convert.ToDouble(invoiceGenerationOutput.IGST);
+                                 Convert.ToDouble(invoiceGenerationOutput.IGST) +
+                                 Convert.ToDouble(invoiceGenerationOutput.UGST);
 
                     double roundedOffSum = Math.Round(sum);
 
@@ -129,8 +164,8 @@ namespace WebApplication1.Controllers
                 reader.Close();
 
 
-                string insertSql = "insert into invoice_generation_table (InvoiceNumber, InvoiceDate, SPUNumber, CRMTicketNumber, DocumentNumber, DocumentDate, VendorName, VendorCode, CustomerName, CustomerCode, ShipToPartyNumber, ShipToPartyName, SubTotal, SGST, CGST, IGST, RoundOff, GrandTotal, InvoiceNumberStatus, InvoicePdfStatus, InvoicePdfDigitalSigStatus, InvoicePdfLocation, regionCode, segmentCode) " +
-                       "values (@InvoiceNumber, @InvoiceDate, @SPUNumber, @CRMTicketNumber, @DocumentNumber, @DocumentDate, @VendorName, @VendorCode, @CustomerName, @CustomerCode, @ShipToPartyNumber, @ShipToPartyName, @SubTotal, @SGST, @CGST, @IGST, @RoundOff, @GrandTotal, @InvoiceNumberStatus, @InvoicePdfStatus, @InvoicePdfDigitalSigStatus, @InvoicePdfLocation, @regionCode, @segmentCode)";
+                string insertSql = "insert into invoice_generation_table (InvoiceNumber, InvoiceDate, SPUNumber, CRMTicketNumber, DocumentNumber, DocumentDate, VendorName, VendorCode, CustomerName, CustomerCode, ShipToPartyNumber, ShipToPartyName, SubTotal, SGST, CGST, IGST,UGST, RoundOff, GrandTotal, InvoiceNumberStatus, InvoicePdfStatus, InvoicePdfDigitalSigStatus, InvoicePdfLocation, regionCode, segmentCode, InvoicePdfDuplicateStatus, InvoicePdfDuplicateLocation, InvoicePdfTriplicateStatus, InvoicePdfTriplicateLocation, branchgstin, shiptopartyaddress) " +
+                       "values (@InvoiceNumber, @InvoiceDate, @SPUNumber, @CRMTicketNumber, @DocumentNumber, @DocumentDate, @VendorName, @VendorCode, @CustomerName, @CustomerCode, @ShipToPartyNumber, @ShipToPartyName, @SubTotal, @SGST, @CGST, @IGST,@UGST, @RoundOff, @GrandTotal, @InvoiceNumberStatus, @InvoicePdfStatus, @InvoicePdfDigitalSigStatus, @InvoicePdfLocation, @regionCode, @segmentCode, @InvoicePdfDuplicateStatus, @InvoicePdfDuplicateLocation, @InvoicePdfTriplicateStatus, @InvoicePdfTriplicateLocation, @branchgstin,@shiptopartyaddress)";
 
                 using (var insertCommand = new MySqlCommand(insertSql, _connection))
                 {
@@ -155,6 +190,7 @@ namespace WebApplication1.Controllers
                         insertCommand.Parameters.AddWithValue("@SGST", invoiceGenerationOutput.SGST);
                         insertCommand.Parameters.AddWithValue("@CGST", invoiceGenerationOutput.CGST);
                         insertCommand.Parameters.AddWithValue("@IGST", invoiceGenerationOutput.IGST);
+                        insertCommand.Parameters.AddWithValue("@UGST", invoiceGenerationOutput.UGST);
                         insertCommand.Parameters.AddWithValue("@RoundOff", invoiceGenerationOutput.RoundOff);
                         insertCommand.Parameters.AddWithValue("@GrandTotal", invoiceGenerationOutput.GrandTotal);
                         insertCommand.Parameters.AddWithValue("@InvoiceNumberStatus", 'X');
@@ -164,24 +200,50 @@ namespace WebApplication1.Controllers
                         insertCommand.Parameters.AddWithValue("@regionCode", invoiceGenerationOutput.regionCode);
                         insertCommand.Parameters.AddWithValue("@segmentCode", invoiceGenerationOutput.segmentCode);
 
+                        insertCommand.Parameters.AddWithValue("@InvoicePdfDuplicateStatus", "");
+                        insertCommand.Parameters.AddWithValue("@InvoicePdfDuplicateLocation", "");
+
+                        insertCommand.Parameters.AddWithValue("@InvoicePdfTriplicateStatus", "");
+                        insertCommand.Parameters.AddWithValue("@InvoicePdfTriplicateLocation", "");
+
+                        insertCommand.Parameters.AddWithValue("@branchgstin", invoiceGenerationOutput.branchGSTIN);
+                        insertCommand.Parameters.AddWithValue("@shiptopartyaddress", invoiceGenerationOutput.shiptopartyaddress);
+
+
                         insertCommand.ExecuteNonQuery();
                     }
                 }
 
 
-                string counterSql = "update counter set serialCounter = @serialCounter";
-                var counterCommand = new MySqlCommand(counterSql, _connection);
+
+                string counterSql = "update counter set serialCounter = @serialCounter where VendorCode = @VendorCode";
+               /* var counterCommand = new MySqlCommand(counterSql, _connection);
                 counterCommand.Parameters.AddWithValue("@serialCounter", serialNumber);
-                counterCommand.ExecuteNonQuery();
+                counterCommand.ExecuteNonQuery();*/
+
+                using (var counterCommand = new MySqlCommand(counterSql, _connection))
+                {
+                    foreach (vendorCounter vendorCounter in listVendorCounter)
+                    {
+                        // Assuming you have an insertCommand object for your INSERT statement
+                        counterCommand.Parameters.Clear();
+
+                        counterCommand.Parameters.AddWithValue("@VendorCode", vendorCounter.vendorcode);
+                        counterCommand.Parameters.AddWithValue("@serialCounter", vendorCounter.counter);
+
+                        counterCommand.ExecuteNonQuery();
+                    }
+                }
 
 
 
-                string statusSqlLast = "UPDATE invoice_monthly_status SET Invoice_Number_Generation_Flag = 'X' WHERE Month_Year = @Month_Year;";
+                        string statusSqlLast = "UPDATE invoice_monthly_status SET Invoice_Number_Generation_Flag = 'X' WHERE Month_Year = @Month_Year AND Segment = @Segment;";
 
                 using (var statuscommand = new MySqlCommand(statusSqlLast, _connection))
                 {
                     statuscommand.Parameters.AddWithValue("@Month_Year", monthYear);
-
+                    statuscommand.Parameters.AddWithValue("@Segment", invoiceGenerationInput.segment);
+                    //statuscommand.Parameters.AddWithValue("@Region", invoiceGenerationInput.);
 
                     statuscommand.ExecuteNonQuery();
 
@@ -190,7 +252,7 @@ namespace WebApplication1.Controllers
 
                 
                 //getting data from table to send to sap and storing it in a list
-                string sqlDbToSap = "SELECT * FROM invoice_generation_table WHERE InvoiceDate BETWEEN @startD AND @endD AND segmentCode = @segment;";
+                string sqlDbToSap = "SELECT DocumentNumber,InvoiceNumber,InvoiceDate FROM invoice_generation_table WHERE InvoiceDate >= @startD AND InvoiceDate <= @endD AND segmentCode = @segment;";
                 MySqlCommand commandDbToSap = new MySqlCommand(sqlDbToSap, _connection);
                 commandDbToSap.Parameters.AddWithValue("@startD", invoiceGenerationInput.startDate);
                 commandDbToSap.Parameters.AddWithValue("@endD", invoiceGenerationInput.endDate);
@@ -205,7 +267,8 @@ namespace WebApplication1.Controllers
 
                     dbToSapInput.document = readerDbToSap.GetString("DocumentNumber");
                     dbToSapInput.invoice = readerDbToSap.GetString("InvoiceNumber");
-                    dbToSapInput.fy = convertToYear(invoiceGenerationInput.startDate);
+                    dbToSapInput.fy = convertToYear(readerDbToSap.GetString("InvoiceDate"));
+                    //dbToSapInput.fy = "2023";
 
                     dbToSapInputs.Add(dbToSapInput);
                 }
@@ -216,8 +279,11 @@ namespace WebApplication1.Controllers
                 {
                     ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
 
-                    client.ClientCredentials.UserName.UserName = "BIRAJ";
-                    client.ClientCredentials.UserName.Password = "Ifb-12345";
+                    client.ClientCredentials.UserName.UserName = "RFCUSER";
+                    client.ClientCredentials.UserName.Password = "Init#1234";
+
+                //    client.ClientCredentials.UserName.UserName = "BIRAJ";
+                //    client.ClientCredentials.UserName.Password = "Ifb-123";
 
 
                     ZSPU_INVOICE_UPD_STR[] invoiceArray = new ZSPU_INVOICE_UPD_STR[dbToSapInputs.Count];
@@ -349,12 +415,26 @@ namespace WebApplication1.Controllers
             try
             {
                 // Parse the input date string to a DateTime object
-                DateTime date = DateTime.ParseExact(inputDate, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture);
+                DateTime date = DateTime.ParseExact(inputDate, "yyyyMMdd", CultureInfo.InvariantCulture);
+               // DateTime date = DateTime.Parse(inputDate);
+
+
+                int currentYear = date.Year;
+                int fiscalYear;
+                if (date.Month >= 4) // Assuming fiscal year starts from April
+                {
+                    fiscalYear = currentYear;
+                }
+                else
+                {
+                    fiscalYear = currentYear - 1;
+                }
 
                 // Format the DateTime object to yyyyMM (month-year) string
-                string result = date.ToString("yyyy");
+                //string result = date.ToString("yyyy");
+                //string result = "" + (date.Month < 4 ? date.Year - 1 : date.Year);
 
-                return result;
+                return fiscalYear.ToString();
             }
             catch (FormatException)
             {
@@ -364,7 +444,7 @@ namespace WebApplication1.Controllers
         }
 
 
-        public String invoiceNumberGeneration(string vendorcode)
+        public String invoiceNumberGeneration(string vendorcode, int serialNum, string documentDate)
         {
             String invoiceNumber = "SP";
 
@@ -377,14 +457,22 @@ namespace WebApplication1.Controllers
 
 
             
-            String temp = String.Format("{0:D5}", serialNumber);
+            String temp = String.Format("{0:D5}", serialNum);
             invoiceNumber = invoiceNumber + temp;
-            
 
-            String Fy = ((DateTime.Now.Year)%100).ToString() + ((DateTime.Now.Year + 1)%100).ToString();
+           // String Fy = "";
+            //String Fy = "2324";
+            /*  if (DateTime.TryParseExact(documentDate, "yyyyMMdd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime parsedDate))
+              {
+                  Fy = (parsedDate.Year % 100).ToString("D2") + ((parsedDate.Year + 1) % 100).ToString("D2");
+                  //invoiceNumber += "/" + Fy;
+              }*/
+            String FinYear = convertToYear(documentDate);
+            DateTime finYeardatetIme = DateTime.ParseExact(FinYear, "yyyy", CultureInfo.InvariantCulture);
+            String Fy = ((finYeardatetIme.Year) %100).ToString() + ((finYeardatetIme.Year + 1)%100).ToString();
 
             invoiceNumber = invoiceNumber + "/" + Fy;
-            serialNumber++;//got from database
+            //serialNumber++;//got from database
             return invoiceNumber;
         }
         

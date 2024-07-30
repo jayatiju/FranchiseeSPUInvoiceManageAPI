@@ -45,47 +45,47 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.10.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
-      <HintPath>..\packages\Portable.BouncyCastle.1.8.10\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    <Reference Include="BouncyCastle.Cryptography, Version=2.0.0.0, Culture=neutral, PublicKeyToken=072edcf4a5328938, processorArchitecture=MSIL">
+      <HintPath>..\packages\BouncyCastle.Cryptography.2.2.1\lib\net461\BouncyCastle.Cryptography.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="itext.barcodes, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.8.0.1\lib\net461\itext.barcodes.dll</HintPath>
+    <Reference Include="itext.barcodes, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.barcodes.dll</HintPath>
     </Reference>
-    <Reference Include="itext.bouncy-castle-adapter, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.bouncy-castle-adapter.8.0.1\lib\net461\itext.bouncy-castle-adapter.dll</HintPath>
+    <Reference Include="itext.bouncy-castle-adapter, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.bouncy-castle-adapter.8.0.2\lib\net461\itext.bouncy-castle-adapter.dll</HintPath>
     </Reference>
-    <Reference Include="itext.bouncy-castle-connector, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.8.0.1\lib\net461\itext.bouncy-castle-connector.dll</HintPath>
+    <Reference Include="itext.bouncy-castle-connector, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.bouncy-castle-connector.dll</HintPath>
     </Reference>
-    <Reference Include="itext.commons, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.commons.8.0.1\lib\net461\itext.commons.dll</HintPath>
+    <Reference Include="itext.commons, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.commons.8.0.2\lib\net461\itext.commons.dll</HintPath>
     </Reference>
-    <Reference Include="itext.forms, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.8.0.1\lib\net461\itext.forms.dll</HintPath>
+    <Reference Include="itext.forms, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.forms.dll</HintPath>
     </Reference>
-    <Reference Include="itext.io, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.8.0.1\lib\net461\itext.io.dll</HintPath>
+    <Reference Include="itext.io, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.io.dll</HintPath>
     </Reference>
-    <Reference Include="itext.kernel, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.8.0.1\lib\net461\itext.kernel.dll</HintPath>
+    <Reference Include="itext.kernel, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.kernel.dll</HintPath>
     </Reference>
-    <Reference Include="itext.layout, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.8.0.1\lib\net461\itext.layout.dll</HintPath>
+    <Reference Include="itext.layout, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.layout.dll</HintPath>
     </Reference>
-    <Reference Include="itext.pdfa, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.8.0.1\lib\net461\itext.pdfa.dll</HintPath>
+    <Reference Include="itext.pdfa, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.pdfa.dll</HintPath>
     </Reference>
-    <Reference Include="itext.sign, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.8.0.1\lib\net461\itext.sign.dll</HintPath>
+    <Reference Include="itext.sign, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.sign.dll</HintPath>
     </Reference>
-    <Reference Include="itext.styledxmlparser, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.8.0.1\lib\net461\itext.styledxmlparser.dll</HintPath>
+    <Reference Include="itext.styledxmlparser, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.styledxmlparser.dll</HintPath>
     </Reference>
-    <Reference Include="itext.svg, Version=8.0.1.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
-      <HintPath>..\packages\itext.8.0.1\lib\net461\itext.svg.dll</HintPath>
+    <Reference Include="itext.svg, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itext.8.0.2\lib\net461\itext.svg.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -106,8 +106,8 @@
     <Reference Include="Microsoft.Extensions.Options, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Options.5.0.0\lib\net461\Microsoft.Extensions.Options.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Extensions.Primitives.5.0.0\lib\net461\Microsoft.Extensions.Primitives.dll</HintPath>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=8.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.8.0.0\lib\net462\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Administration, Version=10.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Administration.11.1.0\lib\netstandard1.5\Microsoft.Web.Administration.dll</HintPath>
@@ -200,8 +200,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Net.Http.4.1.0\lib\net46\System.Net.Http.dll</HintPath>
@@ -233,8 +233,8 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Extensions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.Extensions.4.1.0\lib\net462\System.Runtime.Extensions.dll</HintPath>
@@ -399,7 +399,17 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Connected Services\CustomerMasterSAPReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\CustomerMasterSAPReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\InvoiceSAPReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -409,12 +419,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\InvoiceUpdateReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\InvoiceUpdateReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Connected Services\MaterialMasterSAPReference1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\MaterialMasterSAPReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="Connected Services\VendorMasterSAPReference1\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -430,15 +455,19 @@
     <Compile Include="Controllers\DemoInvoiceSapController.cs" />
     <Compile Include="Controllers\DemoMaterialSapController.cs" />
     <Compile Include="Controllers\DemoVendorSapController.cs" />
+    <Compile Include="Controllers\emSignerController.cs" />
     <Compile Include="Controllers\GetAdminDetailsController.cs" />
     <Compile Include="Controllers\GetBulkPdfController.cs" />
     <Compile Include="Controllers\GetCustomerVendorController.cs" />
+    <Compile Include="Controllers\GetDigitalSignatureStatusController.cs" />
     <Compile Include="Controllers\GetInvoiceGenerationController.cs" />
     <Compile Include="Controllers\GetInvoiceGenErrorController.cs" />
     <Compile Include="Controllers\GetPdfController.cs" />
+    <Compile Include="Controllers\GetPDFSignedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceGenerationController.cs" />
     <Compile Include="Controllers\InvoiceStatusController.cs" />
+    <Compile Include="Controllers\InvoiceUpdateSAPController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MaterialDeactivationController.cs" />
     <Compile Include="Controllers\MaterialMasterController.cs" />
@@ -450,10 +479,13 @@
     <Compile Include="Controllers\SapToDbInvoiceController.cs" />
     <Compile Include="Controllers\SapToDbMaterialController.cs" />
     <Compile Include="Controllers\SapToDbVendorController.cs" />
+    <Compile Include="Controllers\SaveBulkPdfDigitalSignatureController.cs" />
     <Compile Include="Controllers\SendPayloadToEmSignerController.cs" />
+    <Compile Include="Controllers\SplitBulkPdfDigitalSignatureController.cs" />
     <Compile Include="Controllers\UserDeactivationController.cs" />
     <Compile Include="Controllers\UserListController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="Controllers\ValuesController1.cs" />
     <Compile Include="Controllers\VendorDeactivationController.cs" />
     <Compile Include="Controllers\VendorMasterController.cs" />
     <Compile Include="EsignForm.aspx.cs">
@@ -463,10 +495,18 @@
     <Compile Include="EsignForm.aspx.designer.cs">
       <DependentUpon>EsignForm.aspx</DependentUpon>
     </Compile>
+    <Compile Include="EsignFormResponse.aspx.cs">
+      <DependentUpon>EsignFormResponse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="EsignFormResponse.aspx.designer.cs">
+      <DependentUpon>EsignFormResponse.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminDetails.cs" />
+    <Compile Include="Models\CertificateEncryption.cs" />
     <Compile Include="Models\ConnectionString.cs" />
     <Compile Include="Models\CustomerMaster.cs" />
     <Compile Include="Models\CustomerVendor.cs" />
@@ -475,6 +515,9 @@
     <Compile Include="Models\Deactivation.cs" />
     <Compile Include="Models\EmSignerApiInput.cs" />
     <Compile Include="Models\EmSignerApiOutput.cs" />
+    <Compile Include="Models\emSignerRequest.cs" />
+    <Compile Include="Models\emSignerResponse.cs" />
+    <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\InvoiceError.cs" />
     <Compile Include="Models\InvoiceGenerationInput.cs" />
     <Compile Include="Models\InvoiceGenerationOutput.cs" />
@@ -490,7 +533,12 @@
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\ResponseCode.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\vendorBulkPDFInput.cs" />
+    <Compile Include="Models\vendorCounter.cs" />
+    <Compile Include="Models\VendorDS.cs" />
     <Compile Include="Models\VendorMaster.cs" />
+    <Compile Include="Models\vendorSplitBulkPDFInput.cs" />
+    <Compile Include="Models\VendorSplitDS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="test.aspx.cs">
       <DependentUpon>test.aspx</DependentUpon>
@@ -502,12 +550,177 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
+    <Content Include="bin\roslyn\csc.exe.config" />
+    <Content Include="bin\roslyn\csc.rsp" />
+    <Content Include="bin\roslyn\csi.exe.config" />
+    <Content Include="bin\roslyn\csi.rsp" />
+    <Content Include="bin\roslyn\Microsoft.CSharp.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.Managed.Core.targets" />
+    <Content Include="bin\roslyn\Microsoft.VisualBasic.Core.targets" />
+    <Content Include="bin\roslyn\vbc.exe.config" />
+    <Content Include="bin\roslyn\vbc.rsp" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe.config" />
+    <Content Include="bin\WebApplication1.dll.config" />
+    <Content Include="Certificate_C3.cer" />
+    <Content Include="certificate.cer" />
+    <None Include="Connected Services\CustomerMasterSAPReference1\configuration91.svcinfo" />
+    <None Include="Connected Services\CustomerMasterSAPReference1\configuration.svcinfo" />
+    <None Include="Connected Services\CustomerMasterSAPReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Connected Services\CustomerMasterSAPReference1\WebApplication1.CustomerMasterSAPReference1.ZFM_SPU_CUSTOMERSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CustomerMasterSAPReference1\WebApplication1.CustomerMasterSAPReference1.ZFM_SPU_CUSTOMERSResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\CustomerMasterSAPReference\customer.wsdl" />
+    <Content Include="Connected Services\CustomerMasterSAPReference\WebApplication1.CustomerMasterSAPReference.ZFM_SPU_CUSTOMERSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\CustomerMasterSAPReference\WebApplication1.CustomerMasterSAPReference.ZFM_SPU_CUSTOMERSResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\InvoiceSAPReference1\invoices.wsdl" />
+    <Content Include="bin\Antlr3.Runtime.dll" />
+    <Content Include="bin\BouncyCastle.Crypto.dll" />
+    <Content Include="bin\BouncyCastle.Cryptography.dll" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\Google.Protobuf.dll" />
+    <Content Include="bin\itext.barcodes.dll" />
+    <Content Include="bin\itext.bouncy-castle-adapter.dll" />
+    <Content Include="bin\itext.bouncy-castle-connector.dll" />
+    <Content Include="bin\itext.commons.dll" />
+    <Content Include="bin\itext.forms.dll" />
+    <Content Include="bin\itext.io.dll" />
+    <Content Include="bin\itext.kernel.dll" />
+    <Content Include="bin\itext.layout.dll" />
+    <Content Include="bin\itext.pdfa.dll" />
+    <Content Include="bin\itext.sign.dll" />
+    <Content Include="bin\itext.styledxmlparser.dll" />
+    <Content Include="bin\itext.svg.dll" />
+    <Content Include="bin\itextsharp.dll" />
+    <Content Include="bin\K4os.Compression.LZ4.dll" />
+    <Content Include="bin\K4os.Compression.LZ4.Streams.dll" />
+    <Content Include="bin\K4os.Hash.xxHash.dll" />
+    <Content Include="bin\Microsoft.Bcl.AsyncInterfaces.dll" />
+    <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
+    <Content Include="bin\Microsoft.Extensions.DependencyInjection.Abstractions.dll" />
+    <Content Include="bin\Microsoft.Extensions.DependencyInjection.dll" />
+    <Content Include="bin\Microsoft.Extensions.Logging.Abstractions.dll" />
+    <Content Include="bin\Microsoft.Extensions.Logging.dll" />
+    <Content Include="bin\Microsoft.Extensions.Options.dll" />
+    <Content Include="bin\Microsoft.Extensions.Primitives.dll" />
+    <Content Include="bin\Microsoft.Web.Administration.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\Microsoft.Win32.Registry.dll" />
+    <Content Include="bin\MySql.Data.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\roslyn\csc.exe" />
+    <Content Include="bin\roslyn\csi.exe" />
+    <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.Scripting.dll" />
+    <Content Include="bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.amd64.dll" />
+    <Content Include="bin\roslyn\Microsoft.DiaSymReader.Native.x86.dll" />
+    <Content Include="bin\roslyn\Microsoft.Win32.Primitives.dll" />
+    <Content Include="bin\roslyn\System.AppContext.dll" />
+    <Content Include="bin\roslyn\System.Collections.Immutable.dll" />
+    <Content Include="bin\roslyn\System.Console.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.DiagnosticSource.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.FileVersionInfo.dll" />
+    <Content Include="bin\roslyn\System.Diagnostics.StackTrace.dll" />
+    <Content Include="bin\roslyn\System.Globalization.Calendars.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.dll" />
+    <Content Include="bin\roslyn\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.dll" />
+    <Content Include="bin\roslyn\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Net.Http.dll" />
+    <Content Include="bin\roslyn\System.Net.Sockets.dll" />
+    <Content Include="bin\roslyn\System.Reflection.Metadata.dll" />
+    <Content Include="bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\roslyn\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\roslyn\System.Text.Encoding.CodePages.dll" />
+    <Content Include="bin\roslyn\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\roslyn\System.ValueTuple.dll" />
+    <Content Include="bin\roslyn\System.Xml.ReaderWriter.dll" />
+    <Content Include="bin\roslyn\System.Xml.XmlDocument.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.dll" />
+    <Content Include="bin\roslyn\System.Xml.XPath.XDocument.dll" />
+    <Content Include="bin\roslyn\vbc.exe" />
+    <Content Include="bin\roslyn\VBCSCompiler.exe" />
+    <Content Include="bin\System.AppContext.dll" />
+    <Content Include="bin\System.Buffers.dll" />
+    <Content Include="bin\System.Console.dll" />
+    <Content Include="bin\System.Diagnostics.DiagnosticSource.dll" />
+    <Content Include="bin\System.Diagnostics.TraceSource.dll" />
+    <Content Include="bin\System.Diagnostics.Tracing.dll" />
+    <Content Include="bin\System.Globalization.Calendars.dll" />
+    <Content Include="bin\System.IO.Compression.dll" />
+    <Content Include="bin\System.IO.Compression.ZipFile.dll" />
+    <Content Include="bin\System.IO.dll" />
+    <Content Include="bin\System.IO.FileSystem.dll" />
+    <Content Include="bin\System.IO.FileSystem.Primitives.dll" />
+    <Content Include="bin\System.Linq.dll" />
+    <Content Include="bin\System.Linq.Expressions.dll" />
+    <Content Include="bin\System.Memory.dll" />
+    <Content Include="bin\System.Net.Http.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\System.Net.Sockets.dll" />
+    <Content Include="bin\System.Numerics.Vectors.dll" />
+    <Content Include="bin\System.Reflection.dll" />
+    <Content Include="bin\System.Reflection.TypeExtensions.dll" />
+    <Content Include="bin\System.Runtime.CompilerServices.Unsafe.dll" />
+    <Content Include="bin\System.Runtime.dll" />
+    <Content Include="bin\System.Runtime.Extensions.dll" />
+    <Content Include="bin\System.Runtime.InteropServices.dll" />
+    <Content Include="bin\System.Runtime.InteropServices.RuntimeInformation.dll" />
+    <Content Include="bin\System.Security.Claims.dll" />
+    <Content Include="bin\System.Security.Cryptography.Algorithms.dll" />
+    <Content Include="bin\System.Security.Cryptography.Encoding.dll" />
+    <Content Include="bin\System.Security.Cryptography.Primitives.dll" />
+    <Content Include="bin\System.Security.Cryptography.X509Certificates.dll" />
+    <Content Include="bin\System.Security.Principal.Windows.dll" />
+    <Content Include="bin\System.ServiceProcess.ServiceController.dll" />
+    <Content Include="bin\System.Text.RegularExpressions.dll" />
+    <Content Include="bin\System.Threading.Tasks.Extensions.dll" />
+    <Content Include="bin\System.ValueTuple.dll" />
+    <Content Include="bin\System.Web.Cors.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Http.Cors.dll" />
+    <Content Include="bin\System.Web.Http.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Optimization.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\Ubiety.Dns.Core.dll" />
+    <Content Include="bin\WebApplication1.dll" />
+    <Content Include="bin\WebApplication1.pdb" />
+    <Content Include="bin\WebGrease.dll" />
+    <Content Include="bin\ZstdNet.dll" />
     <None Include="Connected Services\CustomerMasterSAPReference\configuration91.svcinfo" />
     <None Include="Connected Services\CustomerMasterSAPReference\configuration.svcinfo" />
     <None Include="Connected Services\CustomerMasterSAPReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Connected Services\InvoiceSAPReference1\WebApplication1.InvoiceSAPReference1.ZfmSpuPurResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\InvoiceSAPReference1\WebApplication1.InvoiceSAPReference1.ZfmSpuPurResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Connected Services\InvoiceSAPReference\invoices.wsdl" />
     <Content Include="Connected Services\InvoiceSAPReference\WebApplication1.InvoiceSAPReference.ZfmSpuPurResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -515,17 +728,36 @@
     <Content Include="Connected Services\InvoiceSAPReference\WebApplication1.InvoiceSAPReference.ZfmSpuPurResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\InvoiceUpdateReference\postlist.wsdl" />
+    <None Include="Connected Services\InvoiceUpdateReference1\postlist.wsdl" />
+    <None Include="Connected Services\InvoiceSAPReference\configuration91.svcinfo" />
+    <None Include="Connected Services\InvoiceSAPReference\configuration.svcinfo" />
+    <None Include="Connected Services\InvoiceSAPReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <Content Include="Connected Services\InvoiceUpdateReference1\WebApplication1.InvoiceUpdateReference1.ZFM_SPU_INVOICE_POSTResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\InvoiceUpdateReference1\WebApplication1.InvoiceUpdateReference1.ZFM_SPU_INVOICE_POSTResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\InvoiceUpdateReference\invoice_update.wsdl" />
     <Content Include="Connected Services\InvoiceUpdateReference\WebApplication1.InvoiceUpdateReference.ZFM_SPU_INVOICE_POSTResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\InvoiceUpdateReference\WebApplication1.InvoiceUpdateReference.ZFM_SPU_INVOICE_POSTResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\MaterialMasterSAPReference\list.wsdl" />
-    <None Include="Connected Services\InvoiceSAPReference\configuration91.svcinfo" />
-    <None Include="Connected Services\InvoiceSAPReference\configuration.svcinfo" />
-    <None Include="Connected Services\InvoiceSAPReference\Reference.svcmap">
+    <None Include="Connected Services\MaterialMasterSAPReference1\list.wsdl" />
+    <None Include="Connected Services\InvoiceSAPReference1\configuration91.svcinfo" />
+    <None Include="Connected Services\InvoiceSAPReference1\configuration.svcinfo" />
+    <None Include="Connected Services\InvoiceSAPReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\InvoiceUpdateReference1\configuration91.svcinfo" />
+    <None Include="Connected Services\InvoiceUpdateReference1\configuration.svcinfo" />
+    <None Include="Connected Services\InvoiceUpdateReference1\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -535,15 +767,28 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <Content Include="Connected Services\MaterialMasterSAPReference1\WebApplication1.MaterialMasterSAPReference1.ZFM_SPU_MATERIALSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Connected Services\MaterialMasterSAPReference1\WebApplication1.MaterialMasterSAPReference1.ZFM_SPU_MATERIALSResponse1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <None Include="Connected Services\MaterialMasterSAPReference\material.wsdl" />
     <Content Include="Connected Services\MaterialMasterSAPReference\WebApplication1.MaterialMasterSAPReference.ZFM_SPU_MATERIALSResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <Content Include="Connected Services\MaterialMasterSAPReference\WebApplication1.MaterialMasterSAPReference.ZFM_SPU_MATERIALSResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\VendorMasterSAPReference\configuration91.svcinfo" />
-    <None Include="Connected Services\VendorMasterSAPReference\configuration.svcinfo" />
-    <None Include="Connected Services\VendorMasterSAPReference\Reference.svcmap">
+    <None Include="Connected Services\VendorMasterSAPReference1\configuration91.svcinfo" />
+    <None Include="Connected Services\VendorMasterSAPReference1\configuration.svcinfo" />
+    <None Include="Connected Services\VendorMasterSAPReference1\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Connected Services\MaterialMasterSAPReference1\configuration91.svcinfo" />
+    <None Include="Connected Services\MaterialMasterSAPReference1\configuration.svcinfo" />
+    <None Include="Connected Services\MaterialMasterSAPReference1\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -553,11 +798,18 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Connected Services\VendorMasterSAPReference\configuration91.svcinfo" />
+    <None Include="Connected Services\VendorMasterSAPReference\configuration.svcinfo" />
+    <None Include="Connected Services\VendorMasterSAPReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="EsignForm.aspx" />
+    <Content Include="EsignFormResponse.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -582,14 +834,15 @@
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\CollectionModelDescription.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\DisplayTemplates\ApiGroup.cshtml" />
     <Content Include="Areas\HelpPage\Views\Help\Api.cshtml" />
-    <None Include="Connected Services\CustomerMasterSAPReference\list.wsdl" />
-    <Content Include="Connected Services\CustomerMasterSAPReference\WebApplication1.CustomerMasterSAPReference.ZFM_SPU_CUSTOMERSResponse.datasource">
+    <None Include="Connected Services\CustomerMasterSAPReference1\list.wsdl" />
+    <None Include="Connected Services\VendorMasterSAPReference1\list.wsdl" />
+    <Content Include="Connected Services\VendorMasterSAPReference1\WebApplication1.VendorMasterSAPReference1.ZFM_SPU_VENDORSResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Connected Services\CustomerMasterSAPReference\WebApplication1.CustomerMasterSAPReference.ZFM_SPU_CUSTOMERSResponse1.datasource">
+    <Content Include="Connected Services\VendorMasterSAPReference1\WebApplication1.VendorMasterSAPReference1.ZFM_SPU_VENDORSResponse1.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <None Include="Connected Services\VendorMasterSAPReference\list.wsdl" />
+    <None Include="Connected Services\VendorMasterSAPReference\vendor.wsdl" />
     <Content Include="Connected Services\VendorMasterSAPReference\WebApplication1.VendorMasterSAPReference.ZFM_SPU_VENDORSResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -688,10 +941,15 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\CustomerMasterSAPReference1\" />
     <WCFMetadataStorage Include="Connected Services\CustomerMasterSAPReference\" />
+    <WCFMetadataStorage Include="Connected Services\InvoiceSAPReference1\" />
     <WCFMetadataStorage Include="Connected Services\InvoiceSAPReference\" />
+    <WCFMetadataStorage Include="Connected Services\InvoiceUpdateReference1\" />
     <WCFMetadataStorage Include="Connected Services\InvoiceUpdateReference\" />
+    <WCFMetadataStorage Include="Connected Services\MaterialMasterSAPReference1\" />
     <WCFMetadataStorage Include="Connected Services\MaterialMasterSAPReference\" />
+    <WCFMetadataStorage Include="Connected Services\VendorMasterSAPReference1\" />
     <WCFMetadataStorage Include="Connected Services\VendorMasterSAPReference\" />
   </ItemGroup>
   <PropertyGroup>

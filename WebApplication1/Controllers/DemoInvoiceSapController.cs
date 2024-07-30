@@ -35,8 +35,11 @@ namespace WebApplication1.Controllers
                 {
                     ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
 
-                    client.ClientCredentials.UserName.UserName = "BIRAJ";
-                    client.ClientCredentials.UserName.Password = "Ifb-12345";
+                    // client.ClientCredentials.UserName.UserName = "BIRAJ";
+                    // client.ClientCredentials.UserName.Password = "Ifb-12345";
+
+                    client.ClientCredentials.UserName.UserName = "RFCUSER";
+                    client.ClientCredentials.UserName.Password = "Init#1234";
 
                     var requestObject = new ZfmSpuPurRequest
                     {
@@ -46,10 +49,10 @@ namespace WebApplication1.Controllers
                             
                             CompanyCode = "1000",
                             DocumentNumber = "",
-                            EndDate = "2019-07-31",
-                            FiscalYear = "2019",
-                            SegmentCode = "1103",
-                            StartDate = "2019-07-01"
+                            EndDate = "2023-11-30",
+                            FiscalYear = "2023",
+                            SegmentCode = "1001",
+                            StartDate = "2023-11-01"
 
                         }
                     };

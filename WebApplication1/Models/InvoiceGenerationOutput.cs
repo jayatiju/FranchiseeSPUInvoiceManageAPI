@@ -23,6 +23,8 @@ namespace WebApplication1.Models
         public string SGST { get; set; }
         public string CGST { get; set; }
         public string IGST { get; set; }
+
+        public string UGST { get; set; }
         public string RoundOff { get; set; }
         public string GrandTotal { get; set; }
         public string InvoiceNumberStatus { get; set; }
@@ -32,5 +34,15 @@ namespace WebApplication1.Models
 
         public string regionCode { get; set; }
         public string segmentCode { get; set; }
+
+        public string branchGSTIN { get; set; }
+        public string shiptopartyaddress { get; set; }
+
+        public string InvoicePdfDuplicateStatus { get; set; }
+        public string InvoicePdfDuplicateLocation { get; set; }
+
+        public string InvoicePdfTriplicateStatus { get; set; }
+        public string InvoicePdfTriplicateLocation { get; set; }
+
     }
 }

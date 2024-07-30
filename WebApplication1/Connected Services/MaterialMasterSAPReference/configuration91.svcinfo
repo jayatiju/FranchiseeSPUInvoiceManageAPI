@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="B0qNenpcspwsAXeFoujKOKWT08rn9T8zOsg+/GEc0cE=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="iksvfpqgfrUiuGmyT7Q3l9BY7Bdym7ugSDL3PPrl4Ic=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="customBinding" name="list2">
+    <bindingConfiguration bindingType="customBinding" name="list4">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>list2</serializedValue>
+          <serializedValue>list4</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -161,10 +161,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="customBinding" name="list_soap122">
+    <bindingConfiguration bindingType="customBinding" name="list_soap124">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>list_soap122</serializedValue>
+          <serializedValue>list_soap124</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -323,10 +323,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="list2" contract="MaterialMasterSAPReference.ZWS_SPU_MATERIAL_LIST_SRV" bindingType="customBinding" address="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_material_list_srv/500/zmaterials/list" bindingConfiguration="list2">
+    <endpoint name="list4" contract="MaterialMasterSAPReference.ZWS_SPU_MATERIAL_LIST_SRV" bindingType="customBinding" address="https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_material_list_srv/500/zmaterials/list" bindingConfiguration="list4">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_material_list_srv/500/zmaterials/list</serializedValue>
+          <serializedValue>https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_material_list_srv/500/zmaterials/list</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -335,7 +335,7 @@
           <serializedValue>customBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>list2</serializedValue>
+          <serializedValue>list4</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>MaterialMasterSAPReference.ZWS_SPU_MATERIAL_LIST_SRV</serializedValue>
@@ -398,7 +398,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>list2</serializedValue>
+          <serializedValue>list4</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -408,10 +408,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="list_soap122" contract="MaterialMasterSAPReference.ZWS_SPU_MATERIAL_LIST_SRV" bindingType="customBinding" address="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_material_list_srv/500/zmaterials/list" bindingConfiguration="list_soap122">
+    <endpoint name="list_soap124" contract="MaterialMasterSAPReference.ZWS_SPU_MATERIAL_LIST_SRV" bindingType="customBinding" address="https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_material_list_srv/500/zmaterials/list" bindingConfiguration="list_soap124">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_material_list_srv/500/zmaterials/list</serializedValue>
+          <serializedValue>https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_material_list_srv/500/zmaterials/list</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -420,7 +420,7 @@
           <serializedValue>customBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>list_soap122</serializedValue>
+          <serializedValue>list_soap124</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>MaterialMasterSAPReference.ZWS_SPU_MATERIAL_LIST_SRV</serializedValue>
@@ -483,7 +483,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>list_soap122</serializedValue>
+          <serializedValue>list_soap124</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

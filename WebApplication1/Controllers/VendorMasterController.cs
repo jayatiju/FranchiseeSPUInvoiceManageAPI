@@ -66,6 +66,7 @@ namespace WebApplication1.Controllers
                     vendorMaster.branchname = reader.GetString("branchname");
                     vendorMaster.regiondesc = reader.GetString("regiondesc");
                     vendorMaster.statedesc = reader.GetString("statedesc");
+                    vendorMaster.vendorcin = reader.GetString("vendor_cin");
 
                     vendormasterList.Add(vendorMaster);
                 }
@@ -121,6 +122,7 @@ namespace WebApplication1.Controllers
                     vendorMaster.branchname = reader.GetString("branchname");
                     vendorMaster.regiondesc = reader.GetString("regiondesc");
                     vendorMaster.statedesc = reader.GetString("statedesc");
+                    vendorMaster.vendorcin = reader.GetString("vendor_cin");
 
                     vendormasterList.Add(vendorMaster);
                 }
@@ -147,11 +149,22 @@ namespace WebApplication1.Controllers
         {
             try
             {
+                /*
+                string sqlgetRegion = "SELECT regioncode FROM customer_master_table where branchcode = @branchcode";
+                MySqlCommand commandgetRegion = new MySqlCommand(sqlgetRegion, _connection);
+                commandgetRegion.Parameters.AddWithValue("@branchcode", $"{branchcode}");
+                MySqlDataReader readergetRegion = commandgetRegion.ExecuteReader();
+                readergetRegion.Read();
+                string regioncode = readergetRegion.GetString("regioncode");
+                readergetRegion.Close();
 
-                string sql = "SELECT * FROM vendor_master_table where branchcode = @branchcode";
+                */
+                string sql = "select * from vendor_master_table where branchcode in(select branchcode FROM franchiseeinvoicedb.customer_master_table where segment = (select segment from franchiseeinvoicedb.customer_master_table where branchcode = @branchcode))";
                 MySqlCommand command = new MySqlCommand(sql, _connection);
                 command.Parameters.AddWithValue("@branchcode", $"{branchcode}");
                 MySqlDataReader reader = command.ExecuteReader();
+
+
 
                 List<VendorMaster> vendormasterList = new List<VendorMaster>();
 
@@ -178,6 +191,7 @@ namespace WebApplication1.Controllers
                     vendorMaster.branchname = reader.GetString("branchname");
                     vendorMaster.regiondesc = reader.GetString("regiondesc");
                     vendorMaster.statedesc = reader.GetString("statedesc");
+                    vendorMaster.vendorcin = reader.GetString("vendor_cin");
 
                     vendormasterList.Add(vendorMaster);
                 }
@@ -234,6 +248,7 @@ namespace WebApplication1.Controllers
                     vendorMaster.branchname = reader.GetString("branchname");
                     vendorMaster.regiondesc = reader.GetString("regiondesc");
                     vendorMaster.statedesc = reader.GetString("statedesc");
+                    vendorMaster.vendorcin = reader.GetString("vendor_cin");
 
                     vendormasterList.Add(vendorMaster);
                 }

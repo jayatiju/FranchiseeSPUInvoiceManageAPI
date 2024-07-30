@@ -132,7 +132,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="IF__ZWS_SPU_VENDOR_LIST_SRV">
+  <wsp:Policy wsu:Id="IF__ZWS_SPU_MATERIAL_LIST_SRV">
     <wsp:ExactlyOne>
       <wsp:All>
         <sapsession:Session xmlns:sapsession="http://www.sap.com/webas/630/soap/features/session/">
@@ -144,7 +144,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="OP__ZFM_SPU_VENDORS">
+  <wsp:Policy wsu:Id="OP__ZFM_SPU_MATERIALS">
     <wsp:ExactlyOne>
       <wsp:All>
         <saptrhnw05:required xmlns:saptrhnw05="http://www.sap.com/NW05/soap/features/transaction/">no</saptrhnw05:required>
@@ -156,21 +156,6 @@
   </wsp:Policy>
   <wsdl:types>
     <xsd:schema attributeFormDefault="qualified" targetNamespace="urn:sap-com:document:sap:rfc:functions">
-      <xsd:simpleType name="char1">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="1" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char10">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="10" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char15">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="15" />
-        </xsd:restriction>
-      </xsd:simpleType>
       <xsd:simpleType name="char16">
         <xsd:restriction base="xsd:string">
           <xsd:maxLength value="16" />
@@ -181,108 +166,92 @@
           <xsd:maxLength value="18" />
         </xsd:restriction>
       </xsd:simpleType>
-      <xsd:simpleType name="char20">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="20" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char241">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="241" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char25">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="25" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char3">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="3" />
-        </xsd:restriction>
-      </xsd:simpleType>
-      <xsd:simpleType name="char35">
-        <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="35" />
-        </xsd:restriction>
-      </xsd:simpleType>
       <xsd:simpleType name="char4">
         <xsd:restriction base="xsd:string">
           <xsd:maxLength value="4" />
         </xsd:restriction>
       </xsd:simpleType>
-      <xsd:simpleType name="date10">
+      <xsd:simpleType name="char40">
         <xsd:restriction base="xsd:string">
-          <xsd:maxLength value="10" />
-          <xsd:pattern value="\d\d\d\d-\d\d-\d\d" />
+          <xsd:maxLength value="40" />
         </xsd:restriction>
       </xsd:simpleType>
-      <xsd:complexType name="ZSPU_VENDOR">
+      <xsd:simpleType name="char5">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="5" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char50">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="char9">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="9" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="unit3">
+        <xsd:restriction base="xsd:string">
+          <xsd:maxLength value="3" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="ZSPU_MATERIAL">
         <xsd:sequence>
-          <xsd:element name="VENDORCODE" type="tns:char10" />
-          <xsd:element name="VENDORNAME" type="tns:char35" />
-          <xsd:element name="VENDORADDRESS" type="tns:char35" />
-          <xsd:element name="BRANCHCODE" type="tns:char10" />
-          <xsd:element name="BRANCHNAME" type="tns:char35" />
-          <xsd:element name="VKBUR" type="tns:char4" />
-          <xsd:element name="GSTINNUM" type="tns:char18" />
-          <xsd:element name="PAN" type="tns:char15" />
-          <xsd:element name="MOBILENO" type="tns:char16" />
-          <xsd:element name="EMAILID" type="tns:char241" />
-          <xsd:element name="PINCODE" type="tns:char10" />
-          <xsd:element name="GSTNREGTYPE" type="tns:char1" />
-          <xsd:element name="EFFECTIVEDATE" type="tns:date10" />
-          <xsd:element name="STATE" type="tns:char3" />
-          <xsd:element name="STATEDESC" type="tns:char20" />
-          <xsd:element name="REGIONCODE" type="tns:char4" />
-          <xsd:element name="REGIONDESC" type="tns:char10" />
-          <xsd:element name="CITY" type="tns:char25" />
+          <xsd:element name="MATNR" type="tns:char18" />
+          <xsd:element name="MAT_CAT" type="tns:char5" />
+          <xsd:element name="MTART" type="tns:char4" />
+          <xsd:element name="MAKTG" type="tns:char40" />
+          <xsd:element name="MEINS" type="tns:unit3" />
+          <xsd:element name="MATKL" type="tns:char9" />
+          <xsd:element name="STEUC" type="tns:char16" />
+          <xsd:element name="TAX_TYPE" type="tns:char50" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:complexType name="ZSPU_VENDOR_TT">
+      <xsd:complexType name="ZSPU_MATERIAL_TT">
         <xsd:sequence>
-          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZSPU_VENDOR" />
+          <xsd:element minOccurs="0" maxOccurs="unbounded" name="item" type="tns:ZSPU_MATERIAL" />
         </xsd:sequence>
       </xsd:complexType>
-      <xsd:element name="ZFM_SPU_VENDORS">
+      <xsd:element name="ZFM_SPU_MATERIALS">
         <xsd:complexType>
           <xsd:sequence />
         </xsd:complexType>
       </xsd:element>
-      <xsd:element name="ZFM_SPU_VENDORSResponse">
+      <xsd:element name="ZFM_SPU_MATERIALSResponse">
         <xsd:complexType>
           <xsd:sequence>
-            <xsd:element name="ET_VENDORS" type="tns:ZSPU_VENDOR_TT" />
+            <xsd:element name="ET_MATERIALS" type="tns:ZSPU_MATERIAL_TT" />
           </xsd:sequence>
         </xsd:complexType>
       </xsd:element>
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="ZFM_SPU_VENDORS">
-    <wsdl:part name="parameters" element="tns:ZFM_SPU_VENDORS" />
+  <wsdl:message name="ZFM_SPU_MATERIALS">
+    <wsdl:part name="parameters" element="tns:ZFM_SPU_MATERIALS" />
   </wsdl:message>
-  <wsdl:message name="ZFM_SPU_VENDORSResponse">
-    <wsdl:part name="parameter" element="tns:ZFM_SPU_VENDORSResponse" />
+  <wsdl:message name="ZFM_SPU_MATERIALSResponse">
+    <wsdl:part name="parameter" element="tns:ZFM_SPU_MATERIALSResponse" />
   </wsdl:message>
-  <wsdl:portType name="ZWS_SPU_VENDOR_LIST_SRV">
+  <wsdl:portType name="ZWS_SPU_MATERIAL_LIST_SRV">
     <wsp:Policy>
-      <wsp:PolicyReference URI="#IF__ZWS_SPU_VENDOR_LIST_SRV" />
+      <wsp:PolicyReference URI="#IF__ZWS_SPU_MATERIAL_LIST_SRV" />
     </wsp:Policy>
-    <wsdl:operation name="ZFM_SPU_VENDORS">
+    <wsdl:operation name="ZFM_SPU_MATERIALS">
       <wsp:Policy>
-        <wsp:PolicyReference URI="#OP__ZFM_SPU_VENDORS" />
+        <wsp:PolicyReference URI="#OP__ZFM_SPU_MATERIALS" />
       </wsp:Policy>
-      <wsdl:input message="tns:ZFM_SPU_VENDORS" />
-      <wsdl:output message="tns:ZFM_SPU_VENDORSResponse" />
+      <wsdl:input message="tns:ZFM_SPU_MATERIALS" />
+      <wsdl:output message="tns:ZFM_SPU_MATERIALSResponse" />
     </wsdl:operation>
   </wsdl:portType>
-  <wsdl:binding name="list" type="tns:ZWS_SPU_VENDOR_LIST_SRV">
+  <wsdl:binding name="list" type="tns:ZWS_SPU_MATERIAL_LIST_SRV">
     <wsp:Policy>
       <wsp:PolicyReference URI="#BN__list" />
     </wsp:Policy>
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="ZFM_SPU_VENDORS">
-      <soap:operation soapAction="urn:sap-com:document:sap:rfc:functions:ZWS_SPU_VENDOR_LIST_SRV:ZFM_SPU_VENDORSRequest" style="document" />
+    <wsdl:operation name="ZFM_SPU_MATERIALS">
+      <soap:operation soapAction="urn:sap-com:document:sap:rfc:functions:ZWS_SPU_MATERIAL_LIST_SRV:ZFM_SPU_MATERIALSRequest" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -291,13 +260,13 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:binding name="list_soap12" type="tns:ZWS_SPU_VENDOR_LIST_SRV">
+  <wsdl:binding name="list_soap12" type="tns:ZWS_SPU_MATERIAL_LIST_SRV">
     <wsp:Policy>
       <wsp:PolicyReference URI="#BN__list_soap12" />
     </wsp:Policy>
     <wsoap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="ZFM_SPU_VENDORS">
-      <wsoap12:operation soapAction="urn:sap-com:document:sap:rfc:functions:ZWS_SPU_VENDOR_LIST_SRV:ZFM_SPU_VENDORSRequest" style="document" />
+    <wsdl:operation name="ZFM_SPU_MATERIALS">
+      <wsoap12:operation soapAction="urn:sap-com:document:sap:rfc:functions:ZWS_SPU_MATERIAL_LIST_SRV:ZFM_SPU_MATERIALSRequest" style="document" />
       <wsdl:input>
         <wsoap12:body use="literal" />
       </wsdl:input>
@@ -306,12 +275,12 @@
       </wsdl:output>
     </wsdl:operation>
   </wsdl:binding>
-  <wsdl:service name="zvendors">
+  <wsdl:service name="zmaterials">
     <wsdl:port name="list" binding="tns:list">
-      <soap:address location="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_vendor_list_srv/500/zvendors/list" />
+      <soap:address location="https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_material_list_srv/500/zmaterials/list" />
     </wsdl:port>
     <wsdl:port name="list_soap12" binding="tns:list_soap12">
-      <wsoap12:address location="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_vendor_list_srv/500/zvendors/list" />
+      <wsoap12:address location="https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_material_list_srv/500/zmaterials/list" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

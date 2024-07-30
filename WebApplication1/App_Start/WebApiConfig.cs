@@ -13,9 +13,13 @@ namespace WebApplication1
             // Web API configuration and services
 
             // Enable CORS
-            //var cors = new EnableCorsAttribute("*", "*", "*");
-            //config.EnableCors(cors);
+            //  var cors = new EnableCorsAttribute("*", "Content-Type, X-Your-Extra-Header-Key", "GET,POST,PUT,DELETE,OPTIONS");
+            //  var cors = new EnableCorsAttribute("https://frspuinv.ifbsupport.com:8080", "Content-Type, X-Your-Extra-Header-Key", "GET,POST,PUT,DELETE,OPTIONS");
+            //  var cors = new EnableCorsAttribute("https://192.168.52.187:8080", "Content-Type, X-Your-Extra-Header-Key", "GET,POST,PUT,DELETE,OPTIONS");
 
+            var cors = new EnableCorsAttribute("*", "Content-Type, X-Your-Extra-Header-Key", "GET,POST,PUT,DELETE,OPTIONS");
+          config.EnableCors(cors);
+            
             // Web API routes
             config.MapHttpAttributeRoutes();
 

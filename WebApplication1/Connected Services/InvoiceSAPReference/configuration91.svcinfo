@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="x90xa4fvi7ycRbdYJQV/go/7wEDVmLJaJy3NdFj5VCw=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="OaAweARP+qzFoXEB49HIoCe1glmKi4pYORYQrfhCkJ4=">
   <bindingConfigurations>
-    <bindingConfiguration bindingType="customBinding" name="invoices">
+    <bindingConfiguration bindingType="customBinding" name="invoices1">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>invoices</serializedValue>
+          <serializedValue>invoices1</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -161,10 +161,10 @@
         </property>
       </properties>
     </bindingConfiguration>
-    <bindingConfiguration bindingType="customBinding" name="invoices_soap12">
+    <bindingConfiguration bindingType="customBinding" name="invoices_soap121">
       <properties>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>invoices_soap12</serializedValue>
+          <serializedValue>invoices_soap121</serializedValue>
         </property>
         <property path="/closeTimeout" isComplexType="false" isExplicitlyDefined="true" clrType="System.TimeSpan, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -323,10 +323,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="invoices" contract="InvoiceSAPReference.ZWS_SPU_PUR_SRV" bindingType="customBinding" address="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices" bindingConfiguration="invoices">
+    <endpoint name="invoices1" contract="InvoiceSAPReference.ZWS_SPU_PUR_SRV" bindingType="customBinding" address="https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices" bindingConfiguration="invoices1">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices</serializedValue>
+          <serializedValue>https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -335,7 +335,7 @@
           <serializedValue>customBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>invoices</serializedValue>
+          <serializedValue>invoices1</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>InvoiceSAPReference.ZWS_SPU_PUR_SRV</serializedValue>
@@ -398,7 +398,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>invoices</serializedValue>
+          <serializedValue>invoices1</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -408,10 +408,10 @@
         </property>
       </properties>
     </endpoint>
-    <endpoint name="invoices_soap12" contract="InvoiceSAPReference.ZWS_SPU_PUR_SRV" bindingType="customBinding" address="https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices" bindingConfiguration="invoices_soap12">
+    <endpoint name="invoices_soap121" contract="InvoiceSAPReference.ZWS_SPU_PUR_SRV" bindingType="customBinding" address="https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices" bindingConfiguration="invoices_soap121">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>https://eccdev:8001/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices</serializedValue>
+          <serializedValue>https://eccdev.ifb.com/sap/bc/srt/rfc/sap/zws_spu_pur_srv/500/zws_spu_invoices/invoices</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />
@@ -420,7 +420,7 @@
           <serializedValue>customBinding</serializedValue>
         </property>
         <property path="/bindingConfiguration" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>invoices_soap12</serializedValue>
+          <serializedValue>invoices_soap121</serializedValue>
         </property>
         <property path="/contract" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue>InvoiceSAPReference.ZWS_SPU_PUR_SRV</serializedValue>
@@ -483,7 +483,7 @@
           <serializedValue>False</serializedValue>
         </property>
         <property path="/name" isComplexType="false" isExplicitlyDefined="true" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>invoices_soap12</serializedValue>
+          <serializedValue>invoices_soap121</serializedValue>
         </property>
         <property path="/kind" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

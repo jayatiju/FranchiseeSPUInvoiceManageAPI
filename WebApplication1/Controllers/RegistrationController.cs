@@ -58,19 +58,21 @@ namespace WebApplication1.Controllers
 
 
                 // Check if email is already present
-                if (IsEmailAlreadyExists(registration.email))
+                string refid = IsEmailAlreadyExists(registration.email);
+                if (refid != null )
                 {
                     response.messageCode = "DE";
-                    response.messageString = "Duplicate email";
+                    response.messageString = "You have registered with this email for User "+refid;
                     return response;
                     
                 }
 
                 // Check if phone number is already present
-                if (IsPhoneNumberAlreadyExists(registration.phnum))
+                string refid1 = IsPhoneNumberAlreadyExists(registration.phnum);
+                if (refid1 != null)
                 {
                     response.messageCode = "DP";
-                    response.messageString = "Duplicate phone";
+                    response.messageString = "You have registered with this phone number for User "+refid1;
                     return response;
                     
                 }
@@ -86,15 +88,15 @@ namespace WebApplication1.Controllers
                 if (IsUserAlreadyExistsInBranch(registration.usertype, registration.branchcode, registration.regioncode))
                 {
                     response.messageCode = "DC";
-                    response.messageString = "Segment Head already exists for this region";
+                    response.messageString = "Branch Head already exists for this region/segment";
                     return response;
 
                 }
                 // Check if user is already present for the same region
-                if (IsUserAlreadyExistsInRegion(registration.usertype, registration.regioncode))
+                if (IsUserAlreadyExistsInRegion(registration.usertype, registration.segment))
                 {
                     response.messageCode = "DR";
-                    response.messageString = "Segment Head already exists for this region";
+                    response.messageString = "Branch Head already exists for this region/segment";
                     return response;
 
                     
@@ -103,7 +105,7 @@ namespace WebApplication1.Controllers
                 // Check if user is already present with the same branch
                 
 
-                string sql = "insert into user_table (userid, usertype, firstname, lastname, password, refid, regioncode, email, phnum, isactive, region_desc, branchcode, segment)   VALUES (@userid,@usertype,@firstname,@lastname,@password,@refid,@regioncode,@email,@phnum,@isactive,@region_desc, @branchcode, @segment)";
+                string sql = "insert into user_table (userid, usertype, firstname, lastname, password, refid, regioncode, email, phnum, isactive, region_desc, branchcode, segment, deactivationreason)   VALUES (@userid,@usertype,@firstname,@lastname,@password,@refid,@regioncode,@email,@phnum,@isactive,@region_desc, @branchcode, @segment, @deactivationreason)";
                 using (var command = new MySqlCommand(sql, _connection))
                 {
                     command.Parameters.AddWithValue("@userid", registration.userid);
@@ -119,6 +121,7 @@ namespace WebApplication1.Controllers
                     command.Parameters.AddWithValue("@region_desc", registration.region_desc);
                     command.Parameters.AddWithValue("@branchcode", registration.branchcode);
                     command.Parameters.AddWithValue("@segment", registration.segment);
+                    command.Parameters.AddWithValue("@deactivationreason", registration.deactivationreason);
 
                     command.ExecuteNonQuery();
 
@@ -173,27 +176,44 @@ namespace WebApplication1.Controllers
             }
         }
 
-        private bool IsEmailAlreadyExists(string email)
+        private string IsEmailAlreadyExists(string email)
         {
             // Perform a database query to check if the email already exists
             // Replace this with your actual database query logic
-            using (var command = new MySqlCommand("SELECT COUNT(*) FROM user_table WHERE email = @email AND isactive = 'X'" , _connection))
+            using (var command = new MySqlCommand("SELECT refid FROM user_table WHERE email = @email AND isactive = 'X'" , _connection))
             {
                 command.Parameters.AddWithValue("@email", email);
-                int count = Convert.ToInt32(command.ExecuteScalar());
-                return count > 0; // Return true if email already exists
+                object refid = command.ExecuteScalar();
+
+                if (refid != null && refid != DBNull.Value)
+                {
+                    return refid.ToString(); // Return the refid as a string
+                }
+                else
+                {
+                    return null; // Return null if the email doesn't exist
+                }
             }
         }
 
-        private bool IsPhoneNumberAlreadyExists(string phoneNumber)
+        private string IsPhoneNumberAlreadyExists(string phoneNumber)
         {
             // Perform a database query to check if the phone number already exists
             // Replace this with your actual database query logic
-            using (var command = new MySqlCommand("SELECT COUNT(*) FROM user_table WHERE phnum = @phnum AND isactive = 'X'", _connection))
+            using (var command = new MySqlCommand("SELECT refid FROM user_table WHERE phnum = @phnum AND isactive = 'X'", _connection))
             {
                 command.Parameters.AddWithValue("@phnum", phoneNumber);
-                int count = Convert.ToInt32(command.ExecuteScalar());
-                return count > 0; // Return true if phone number already exists
+                object refid = command.ExecuteScalar();
+
+                if (refid != null && refid != DBNull.Value)
+                {
+                    return refid.ToString(); // Return the refid as a string
+                }
+                else
+                {
+                    return null; // Return null if the email doesn't exist
+                }
+                
             }
         }
 
@@ -215,16 +235,16 @@ namespace WebApplication1.Controllers
             return false; // Return false for other user types
         }
 
-        private bool IsUserAlreadyExistsInRegion(string userType, string regionCode)
+        private bool IsUserAlreadyExistsInRegion(string userType, string segment)
         {
             // Perform a database query to check if a user with the same user ID and region code already exists
             // Replace this with your actual database query logic
             if (userType == "C")
             {
-                using (var command = new MySqlCommand("SELECT COUNT(*) FROM user_table WHERE usertype = 'C' AND regioncode = @regioncode AND isactive = 'X'", _connection))
+                using (var command = new MySqlCommand("SELECT COUNT(*) FROM user_table WHERE usertype = 'C' AND segment = @segment AND isactive = 'X'", _connection))
                 {
 
-                    command.Parameters.AddWithValue("@regioncode", regionCode);
+                    command.Parameters.AddWithValue("@segment", segment);
                     int count = Convert.ToInt32(command.ExecuteScalar());
                     return count > 0; // Return true if a duplicate user in the same region exists
                 }
@@ -232,15 +252,15 @@ namespace WebApplication1.Controllers
             return false; // Return false for other user types
         }
 
-        private bool IsUserAlreadyExistsInBranch(string userType, string branchCode, string regionCode)
+        private bool IsUserAlreadyExistsInBranch(string userType, string branchCode, string segment)
         {
             // Perform a database query to check if a user with the same user ID and branch code already exists
             // Replace this with your actual database query logic
             if (userType == "C")
             {
-                using (var command = new MySqlCommand("SELECT COUNT(*) FROM user_table WHERE usertype = 'C' AND branchcode = @branchcode AND regioncode = @regioncode AND isactive = 'X'", _connection))
+                using (var command = new MySqlCommand("SELECT COUNT(*) FROM user_table WHERE usertype = 'C' AND branchcode = @branchcode AND segment = @segment AND isactive = 'X'", _connection))
                 {
-                    command.Parameters.AddWithValue("@regioncode", regionCode);
+                    command.Parameters.AddWithValue("@segment", segment);
                     command.Parameters.AddWithValue("@branchcode", branchCode);
                     int count = Convert.ToInt32(command.ExecuteScalar());
                     return count > 0; // Return true if a duplicate user in the same branch exists

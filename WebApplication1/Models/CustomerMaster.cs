@@ -19,5 +19,7 @@ namespace WebApplication1.Models
         public string emailid { get; set; }
         public string isactive { get; set; }
         public string segment { get; set; }
+        public string customercin { get; set; }
+        public string plantdesc { get; set; }
     }
 }

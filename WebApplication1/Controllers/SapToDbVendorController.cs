@@ -9,6 +9,7 @@ using WebApplication1.VendorMasterSAPReference;
 using System.ServiceModel;
 using System.Web.Http.Cors;
 using MySql.Data.MySqlClient;
+using System.Globalization;
 
 
 namespace WebApplication1.Controllers
@@ -50,8 +51,11 @@ namespace WebApplication1.Controllers
 
                         ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
 
-                        client.ClientCredentials.UserName.UserName = "BIRAJ";
-                        client.ClientCredentials.UserName.Password = "Ifb-12345";
+                        client.ClientCredentials.UserName.UserName = "RFCUSER";
+                        client.ClientCredentials.UserName.Password = "Init#1234";
+
+                    //    client.ClientCredentials.UserName.UserName = "BIRAJ";
+                    //    client.ClientCredentials.UserName.Password = "Ifb-123";
 
                         var request = new ZFM_SPU_VENDORSRequest
                         {
@@ -91,7 +95,7 @@ namespace WebApplication1.Controllers
                                 vendorMaster.mobilenum = sapVendor.MOBILENO;
                                 vendorMaster.emailid = sapVendor.EMAILID;
                                 vendorMaster.pincode = sapVendor.PINCODE;
-                                vendorMaster.gstinregtype = sapVendor.GSTNREGTYPE;
+                                vendorMaster.gstinregtype = sapVendor.GSTNREGTYPEDESC;
                                 vendorMaster.effectivedate = sapVendor.EFFECTIVEDATE;
                                 vendorMaster.state = sapVendor.STATE;
                                 vendorMaster.regioncode = sapVendor.REGIONCODE;
@@ -100,13 +104,16 @@ namespace WebApplication1.Controllers
                                 vendorMaster.branchname = sapVendor.BRANCHNAME;
                                 vendorMaster.regiondesc = sapVendor.REGIONDESC;
                                 vendorMaster.statedesc = sapVendor.STATEDESC;
+                                vendorMaster.vendorcin = sapVendor.CIN;
+
+
 
 
 
 
                                 //vendorMastersList.Add(vendorMaster);
-                                string sql = "insert into vendor_master_table (vendorcode, vendorname, address, branchcode, gstinnum, pannum, mobilenum, emailid, pincode, gstinregtype, effectivedate, state, regioncode, city, isactive, branchname, regiondesc, statedesc)   " +
-                                    "VALUES (@vendorcode, @vendorname, @address, @branchcode, @gstinnum, @pannum, @mobilenum, @emailid, @pincode, @gstinregtype, @effectivedate, @state, @regioncode, @city, @isactive, @branchname, @regiondesc, @statedesc)";
+                                string sql = "insert into vendor_master_table (vendorcode, vendorname, address, branchcode, gstinnum, pannum, mobilenum, emailid, pincode, gstinregtype, effectivedate, state, regioncode, city, isactive, branchname, regiondesc, statedesc, vendor_cin)   " +
+                                    "VALUES (@vendorcode, @vendorname, @address, @branchcode, @gstinnum, @pannum, @mobilenum, @emailid, @pincode, @gstinregtype, @effectivedate, @state, @regioncode, @city, @isactive, @branchname, @regiondesc, @statedesc, @vendorcin)";
                                 using (var command = new MySqlCommand(sql, _connection))
                                 {
                                     command.Parameters.AddWithValue("@vendorcode", vendorMaster.vendorcode);
@@ -127,16 +134,124 @@ namespace WebApplication1.Controllers
                                     command.Parameters.AddWithValue("@branchname", vendorMaster.branchname);
                                     command.Parameters.AddWithValue("@statedesc", vendorMaster.statedesc);
                                     command.Parameters.AddWithValue("@regiondesc", vendorMaster.regiondesc);
-
+                                    command.Parameters.AddWithValue("@vendorcin", vendorMaster.vendorcin);
 
                                     command.ExecuteNonQuery();
 
 
                                 }
+                           
+                                var VendorCode = sapVendor.VENDORCODE;
+                                var ifNewVendor = 0;
+
+                                //DateTime serverTime = DateTime.Now;
+
+                                string getCounter = "SELECT * FROM franchiseeinvoicedb.counter where VendorCode = @vendorcode" ;
+                                MySqlCommand sqlCommand = new MySqlCommand(getCounter, _connection);
+                                sqlCommand.Parameters.AddWithValue("@vendorcode", VendorCode);
+                                MySqlDataReader counterReader = sqlCommand.ExecuteReader();
+
+                                //DateTime date = DateTime.UtcNow;
+                                //DateTime date = DateTime.ParseExact(DateTime.Now.ToString(), "yyyyMMdd", CultureInfo.InvariantCulture);
+
+                                DateTime currentDate = DateTime.UtcNow;
+                                DateTime istNow = TimeZoneInfo.ConvertTimeFromUtc(currentDate, TimeZoneInfo.FindSystemTimeZoneById("India Standard Time"));
+
+
+                                int currentYear = istNow.Year;
+                                int fiscalYear;
+                                if (istNow.Month >= 5) // Assuming fiscal year starts from April
+                                {
+                                    fiscalYear = currentYear;
+                                }
+                                else
+                                {
+                                    fiscalYear = currentYear - 1;
+                                }
+
+
+                                if (!counterReader.HasRows)
+                                {
+                                    ifNewVendor = 1;
+                                }
+                                else
+                                {
+                                    while (counterReader.Read())
+                                    {
+                                        DateTime vendorUpdateDate = counterReader.GetDateTime("UpdateDate");
+
+                                        int currentYearVendorUpdate = vendorUpdateDate.Year;
+                                        int fiscalYearVendorUpdate;
+                                        if (vendorUpdateDate.Month >= 5) // Assuming fiscal year starts from April
+                                        {
+                                            fiscalYearVendorUpdate = currentYearVendorUpdate;
+                                        }
+                                        else
+                                        {
+                                            fiscalYearVendorUpdate = currentYearVendorUpdate - 1;
+                                        }
+
+                                        //String FyNow = ((date.Year) % 100).ToString() + ((date.Year + 1) % 100).ToString();
+                                        //String FyVendorUpdateDate = ((vendorUpdateDate.Year) % 100).ToString() + ((vendorUpdateDate.Year + 1) % 100).ToString();
+                                        
+                                        if (fiscalYear > fiscalYearVendorUpdate)
+                                        {
+                                            ifNewVendor = 2;
+
+                                        }
+                                    }
+                                }
+                                
+                                counterReader.Close();
+
+                                vendorCounter iVendorCounter = new vendorCounter();
+                               
+                                if (ifNewVendor == 1)
+                                { 
+                                    vendorCounter iVendorCounternew = new vendorCounter();
+                                    iVendorCounternew.vendorcode = VendorCode;
+                                    iVendorCounternew.counter = 1;
+
+                                    string sqlcounter = "insert into counter (serialCounter, VendorCode, UpdateDate)" +
+                                    "VALUES (@serialcounter, @vendorcode, @UpdateDate)";
+                                    using (var commandcounter = new MySqlCommand(sqlcounter, _connection))
+                                    {
+                                        commandcounter.Parameters.AddWithValue("@serialcounter", iVendorCounternew.counter);
+                                        commandcounter.Parameters.AddWithValue("@vendorcode", iVendorCounternew.vendorcode);
+                                        commandcounter.Parameters.AddWithValue("@UpdateDate", istNow);
+                                        commandcounter.ExecuteNonQuery();
+                                    }
+
+
+                                }
+
+                                if (ifNewVendor == 2)
+                                {
+                                    vendorCounter iVendorCounternew = new vendorCounter();
+                                    iVendorCounternew.vendorcode = VendorCode;
+                                    iVendorCounternew.counter = 1;
+
+                                    string sqlcounter = "UPDATE `franchiseeinvoicedb`.`counter` SET `serialCounter` = @serialcounter, `UpdateDate` = @UpdateDate " +
+                                        "WHERE `VendorCode` = @vendorcode; ";
+                                    using (var commandcounter = new MySqlCommand(sqlcounter, _connection))
+                                    {
+                                        commandcounter.Parameters.AddWithValue("@serialcounter", iVendorCounternew.counter);
+                                        commandcounter.Parameters.AddWithValue("@vendorcode", iVendorCounternew.vendorcode);
+                                        commandcounter.Parameters.AddWithValue("@UpdateDate", istNow);
+                                        commandcounter.ExecuteNonQuery();
+                                    }
+
+
+                                }
+
+
                             }
+
                             responseCode.messageCode = "S";
                             responseCode.messageString = "Data successfully inserted from SAP to Database for vendor";
                         }
+
+
                     }
                     catch (Exception ex)
                     {

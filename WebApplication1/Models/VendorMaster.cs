@@ -25,5 +25,6 @@ namespace WebApplication1.Models
         public string branchname { get; set; }
         public string regiondesc { get; set; }
         public string statedesc { get; set; }
+        public string vendorcin { get; set; }
     }
 }

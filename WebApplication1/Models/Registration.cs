@@ -30,5 +30,6 @@ namespace WebApplication1.Models
         public string region_desc { get; set; }
         public string branchcode { get; set; }
         public string segment { get; set; }
+        public string deactivationreason { get; set; }
     }
 }

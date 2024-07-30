@@ -74,6 +74,10 @@ namespace WebApplication1.CustomerMasterSAPReference {
         
         private string eMAILIDField;
         
+        private string cINField;
+        
+        private string pLANT_DESCRField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public string BRANCHCODE {
@@ -203,6 +207,30 @@ namespace WebApplication1.CustomerMasterSAPReference {
             set {
                 this.eMAILIDField = value;
                 this.RaisePropertyChanged("EMAILID");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        public string CIN {
+            get {
+                return this.cINField;
+            }
+            set {
+                this.cINField = value;
+                this.RaisePropertyChanged("CIN");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
+        public string PLANT_DESCR {
+            get {
+                return this.pLANT_DESCRField;
+            }
+            set {
+                this.pLANT_DESCRField = value;
+                this.RaisePropertyChanged("PLANT_DESCR");
             }
         }
         

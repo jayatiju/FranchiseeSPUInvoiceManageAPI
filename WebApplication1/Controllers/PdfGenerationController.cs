@@ -53,7 +53,7 @@ namespace WebApplication1.Controllers
 
                 // Make the API call to generate PDF
 
-                string generatePdfUrl = $"http://192.168.52.174:9000/generatePDF/{invoiceGenerationInput.startDate}/{invoiceGenerationInput.endDate}/{invoiceGenerationInput.segment}";
+                string generatePdfUrl = $"https://frspuinv.ifbsupport.com:9000/generatePDF/{invoiceGenerationInput.startDate}/{invoiceGenerationInput.endDate}/{invoiceGenerationInput.segment}";
 
                 //var requestBody = new
                 //{
@@ -72,12 +72,12 @@ namespace WebApplication1.Controllers
                     httpClient.Timeout = TimeSpan.FromMinutes(30);
                     
 
-                    string statusSqlPdfIp = "UPDATE invoice_monthly_status SET Invoice_PDF_Generation_Flag = 'IP' WHERE Month_Year = @Month_Year;";
+                    string statusSqlPdfIp = "UPDATE invoice_monthly_status SET Invoice_PDF_Generation_Flag = 'IP' WHERE Month_Year = @Month_Year AND Segment = @Segment;";
 
                     using (var statuscommandPdfIp = new MySqlCommand(statusSqlPdfIp, _connection))
                     {
                         statuscommandPdfIp.Parameters.AddWithValue("@Month_Year", monthYear);
-
+                        statuscommandPdfIp.Parameters.AddWithValue("@Segment", invoiceGenerationInput.segment);
 
                         statuscommandPdfIp.ExecuteNonQuery();
 

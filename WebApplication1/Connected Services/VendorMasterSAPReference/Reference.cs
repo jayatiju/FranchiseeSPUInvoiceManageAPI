@@ -76,6 +76,8 @@ namespace WebApplication1.VendorMasterSAPReference {
         
         private string gSTNREGTYPEField;
         
+        private string gSTNREGTYPEDESCField;
+        
         private string eFFECTIVEDATEField;
         
         private string sTATEField;
@@ -87,6 +89,8 @@ namespace WebApplication1.VendorMasterSAPReference {
         private string rEGIONDESCField;
         
         private string cITYField;
+        
+        private string cINField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -234,6 +238,18 @@ namespace WebApplication1.VendorMasterSAPReference {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
+        public string GSTNREGTYPEDESC {
+            get {
+                return this.gSTNREGTYPEDESCField;
+            }
+            set {
+                this.gSTNREGTYPEDESCField = value;
+                this.RaisePropertyChanged("GSTNREGTYPEDESC");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
         public string EFFECTIVEDATE {
             get {
                 return this.eFFECTIVEDATEField;
@@ -245,7 +261,7 @@ namespace WebApplication1.VendorMasterSAPReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
         public string STATE {
             get {
                 return this.sTATEField;
@@ -257,7 +273,7 @@ namespace WebApplication1.VendorMasterSAPReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=14)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
         public string STATEDESC {
             get {
                 return this.sTATEDESCField;
@@ -269,7 +285,7 @@ namespace WebApplication1.VendorMasterSAPReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=15)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=16)]
         public string REGIONCODE {
             get {
                 return this.rEGIONCODEField;
@@ -281,7 +297,7 @@ namespace WebApplication1.VendorMasterSAPReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=16)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=17)]
         public string REGIONDESC {
             get {
                 return this.rEGIONDESCField;
@@ -293,7 +309,7 @@ namespace WebApplication1.VendorMasterSAPReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=17)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=18)]
         public string CITY {
             get {
                 return this.cITYField;
@@ -301,6 +317,18 @@ namespace WebApplication1.VendorMasterSAPReference {
             set {
                 this.cITYField = value;
                 this.RaisePropertyChanged("CITY");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=19)]
+        public string CIN {
+            get {
+                return this.cINField;
+            }
+            set {
+                this.cINField = value;
+                this.RaisePropertyChanged("CIN");
             }
         }
         

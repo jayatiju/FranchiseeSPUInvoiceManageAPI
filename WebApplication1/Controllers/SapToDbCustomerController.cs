@@ -49,8 +49,12 @@ namespace WebApplication1.Controllers
 
                         ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
 
-                        client.ClientCredentials.UserName.UserName = "BIRAJ";
-                        client.ClientCredentials.UserName.Password = "Ifb-12345";
+                        client.ClientCredentials.UserName.UserName = "RFCUSER";
+                        client.ClientCredentials.UserName.Password = "Init#1234";
+
+                     //   client.ClientCredentials.UserName.UserName = "BIRAJ";
+                     //   client.ClientCredentials.UserName.Password = "Ifb-123";
+
                         var request = new ZFM_SPU_CUSTOMERSRequest
                         {
                             ZFM_SPU_CUSTOMERS = new ZFM_SPU_CUSTOMERS()
@@ -113,11 +117,21 @@ namespace WebApplication1.Controllers
                                     customerMaster.segment = sapCustomer.SEGMENT;
                                 }
 
+                                customerMaster.customercin = sapCustomer.CIN;
+
+                                string plantdescsap = sapCustomer.PLANT_DESCR;
+                                if (plantdescsap.Length != 0)
+                                {
+                                    customerMaster.plantdesc = plantdescsap;
+                                }
+                                else
+                                {
+                                    customerMaster.plantdesc = "";
+                                }
 
 
-
-                                string sql = "insert into customer_master_table (branchcode, branchname, gstinnum, address, pincode, regioncode, regiondesc, pannum, mobilenum, emailid, isactive, segment)   " +
-                                    "VALUES (@branchcode, @branchname, @gstinnum, @address, @pincode, @regioncode, @regiondesc, @pannum, @mobilenum, @emailid, @isactive, @segment)";
+                                string sql = "insert into customer_master_table (branchcode, branchname, gstinnum, address, pincode, regioncode, regiondesc, pannum, mobilenum, emailid, isactive, segment, customer_cin, plantdesc)   " +
+                                    "VALUES (@branchcode, @branchname, @gstinnum, @address, @pincode, @regioncode, @regiondesc, @pannum, @mobilenum, @emailid, @isactive, @segment, @customercin, @plantdesc)";
                                 using (var command = new MySqlCommand(sql, _connection))
                                 {
                                     command.Parameters.AddWithValue("@branchcode", customerMaster.branchcode);
@@ -132,7 +146,8 @@ namespace WebApplication1.Controllers
                                     command.Parameters.AddWithValue("@emailid", customerMaster.emailid);
                                     command.Parameters.AddWithValue("@isactive", customerMaster.isactive);
                                     command.Parameters.AddWithValue("@segment", customerMaster.segment);
-
+                                    command.Parameters.AddWithValue("@customercin", customerMaster.customercin);
+                                    command.Parameters.AddWithValue("@plantdesc", customerMaster.plantdesc);
 
                                     command.ExecuteNonQuery();
 

@@ -34,16 +34,16 @@ namespace WebApplication1.Controllers
         }
 
         [HttpGet]
-        public ResponseCode GetStatus(string monthYear, string region)
+        public ResponseCode GetStatus(string monthYear, string segment)
         {
             try
             {
-                string sql = "SELECT Data_Sync_Flag, Invoice_Number_Generation_Flag, Invoice_PDF_Generation_Flag FROM invoice_monthly_status WHERE Month_Year = @monthYear AND Region = @region";
+                string sql = "SELECT Data_Sync_Flag, Invoice_Number_Generation_Flag, Invoice_PDF_Generation_Flag FROM invoice_monthly_status WHERE Month_Year = @monthYear AND Segment = @segment";
 
                 using (var command = new MySqlCommand(sql, _connection))
                 {
                     command.Parameters.AddWithValue("@monthYear", $"{monthYear}");
-                    command.Parameters.AddWithValue("@region", $"{ region}");
+                    command.Parameters.AddWithValue("@segment", $"{ segment}");
 
                     using (var reader = command.ExecuteReader())
                     {

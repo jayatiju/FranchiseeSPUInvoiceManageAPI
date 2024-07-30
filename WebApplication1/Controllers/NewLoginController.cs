@@ -33,6 +33,7 @@ namespace WebApplication1.Controllers
             }
         }
         [HttpPost]
+        
         public IHttpActionResult Post([FromBody] Login login)
         {
             try
@@ -99,7 +100,7 @@ namespace WebApplication1.Controllers
 
                 else if (user.usertype.Equals("V") && user.isactive.Equals("X"))
                 {
-                    string sqlVendor = "SELECT users.refid, vendors.vendorname as reference_desc  FROM user_table users RIGHT OUTER JOIN vendor_master_table vendors ON users.refid = vendors.vendorcode where email = @email";
+                    string sqlVendor = "SELECT users.refid, vendors.vendorname as reference_desc  FROM user_table users LEFT OUTER JOIN vendor_master_table vendors ON users.refid = vendors.vendorcode where email = @email";
                     using (var commandVendor = new MySqlCommand(sqlVendor, _connection))
                     {
                         commandVendor.Parameters.AddWithValue("@email", login.email);
