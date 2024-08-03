@@ -46,12 +46,12 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                string sql = "select distinct MonthYear, RegionCode, VendorCode, FlePath,FileName,DsStatus,TransactionNum,ErrorMessage, ReferenceNum, InvoicePdfDSStatus FROM franchiseeinvoicedb.vendor_ds_table where MonthYear = @MonthYear AND RegionCode = @RegionCode AND VendorCode = @VendorCode";
+                string sql = "select distinct MonthYear, RegionCode, VendorCode, FlePath,FileName,DsStatus,TransactionNum,ErrorMessage, ReferenceNum, InvoicePdfDSStatus FROM franchiseeinvoicedb.vendor_ds_table where MonthYear = @MonthYear AND VendorCode = @VendorCode";
                 MySqlCommand command = new MySqlCommand(sql, _connection);
                 string MonthYear = convertToMonthYearVendor(vendorBulkPDFInput.startDate);
 
                 command.Parameters.AddWithValue("@MonthYear", $"{MonthYear}");                
-                command.Parameters.AddWithValue("@regionCode", $"{vendorBulkPDFInput.region}");
+                //command.Parameters.AddWithValue("@regionCode", $"{vendorBulkPDFInput.region}");
                 command.Parameters.AddWithValue("@vendorCode", $"{vendorBulkPDFInput.vendorcode}");
                 MySqlDataReader reader = command.ExecuteReader();
 

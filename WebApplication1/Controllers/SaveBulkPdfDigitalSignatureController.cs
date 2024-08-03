@@ -51,7 +51,7 @@ namespace WebApplication1.Controllers
                 MySqlCommand command = new MySqlCommand(sql, _connection);
                 command.Parameters.AddWithValue("@startDate", $"{vendorBulkPDFInput.startDate}");
                 command.Parameters.AddWithValue("@endDate", $"{vendorBulkPDFInput.endDate}");
-                command.Parameters.AddWithValue("@regionCode", $"{vendorBulkPDFInput.region}");
+                //command.Parameters.AddWithValue("@regionCode", $"{vendorBulkPDFInput.region}");
                 command.Parameters.AddWithValue("@vendorCode", $"{vendorBulkPDFInput.vendorcode}");
                 MySqlDataReader reader = command.ExecuteReader();
 
@@ -162,7 +162,7 @@ namespace WebApplication1.Controllers
                             VendorDS vendorDSItem = new VendorDS();
 
                             vendorDSItem.monthYear = convertToMonthYearVendor(vendorBulkPDFInput.startDate);
-                            vendorDSItem.region = vendorBulkPDFInput.region;
+                            //vendorDSItem.region = vendorBulkPDFInput.region;
                             vendorDSItem.vendorcode = vendorBulkPDFInput.vendorcode;
                             vendorDSItem.filePath = filePath;
                             vendorDSItem.fileName = fileName;
@@ -183,7 +183,7 @@ namespace WebApplication1.Controllers
                                 using (var insertCommand = new MySqlCommand(insertSql, _connection))
                                 {
                                     insertCommand.Parameters.AddWithValue("@MonthYear", convertToMonthYearVendor(vendorBulkPDFInput.startDate));
-                                    insertCommand.Parameters.AddWithValue("@RegionCode", vendorBulkPDFInput.region);
+                                    //insertCommand.Parameters.AddWithValue("@RegionCode", vendorBulkPDFInput.region);
                                     insertCommand.Parameters.AddWithValue("@VendorCode", vendorBulkPDFInput.vendorcode);
                                     insertCommand.Parameters.AddWithValue("@FlePath", filePath);
                                     insertCommand.Parameters.AddWithValue("@DocumentNumber", listDocumentNum[j]);

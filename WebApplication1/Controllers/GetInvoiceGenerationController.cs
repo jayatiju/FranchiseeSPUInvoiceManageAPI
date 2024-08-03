@@ -36,15 +36,14 @@ namespace WebApplication1.Controllers
 
         //for region and vendorcode
         [HttpGet]
-        public IHttpActionResult GetInvoice (string startdate, string enddate, string region, string vendorcode)
+        public IHttpActionResult GetInvoice (string startdate, string enddate, string vendorcode)
         {
             try
             {
-                string sql = "SELECT * FROM invoice_generation_table WHERE InvoiceDate >= @startDate AND InvoiceDate <= @endDate AND regionCode = @regionCode AND VendorCode = @vendorCode ";
+                string sql = "SELECT * FROM invoice_generation_table WHERE InvoiceDate >= @startDate AND InvoiceDate <= @endDate  AND VendorCode = @vendorCode ";
                 MySqlCommand command = new MySqlCommand(sql, _connection);
                 command.Parameters.AddWithValue("@startDate", $"{startdate}");
                 command.Parameters.AddWithValue("@endDate", $"{enddate}");
-                command.Parameters.AddWithValue("@regionCode", $"{region}");
                 command.Parameters.AddWithValue("@vendorCode", $"{vendorcode}");
                 MySqlDataReader reader = command.ExecuteReader();
 
@@ -185,7 +184,7 @@ namespace WebApplication1.Controllers
 
         //only region
         [HttpGet]
-        public IHttpActionResult GetInvoice(string startdate, string enddate, string region)
+        public IHttpActionResult GetInvoiceReg(string startdate, string enddate, string region)
         {
             try
             {

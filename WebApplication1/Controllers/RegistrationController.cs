@@ -102,8 +102,22 @@ namespace WebApplication1.Controllers
                     
                 }
 
+                if (!IsPasswordLengthValid(registration.password))
+                {
+                    response.messageCode = "PL";
+                    response.messageString = "Password must be between 5 and 20 characters.";
+                    return response;
+                }
+
+                if (!IsPasswordComplex(registration.password))
+                {
+                    response.messageCode = "PC";
+                    response.messageString = "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character (@#$^_()).";
+                    return response;
+                }
+
                 // Check if user is already present with the same branch
-                
+
 
                 string sql = "insert into user_table (userid, usertype, firstname, lastname, password, refid, regioncode, email, phnum, isactive, region_desc, branchcode, segment, deactivationreason)   VALUES (@userid,@usertype,@firstname,@lastname,@password,@refid,@regioncode,@email,@phnum,@isactive,@region_desc, @branchcode, @segment, @deactivationreason)";
                 using (var command = new MySqlCommand(sql, _connection))
@@ -269,6 +283,22 @@ namespace WebApplication1.Controllers
             return false;
         }
 
-        
+        private bool IsPasswordLengthValid(string password)
+        {
+            return password.Length >= 5 && password.Length <= 20;
+        }
+
+        private bool IsPasswordComplex(string password)
+        {
+            bool hasUpperCase = password.Any(char.IsUpper);
+            bool hasLowerCase = password.Any(char.IsLower);
+            bool hasDigit = password.Any(char.IsDigit);
+            bool hasSpecialChar = password.Any(c => "@#$^_()".Contains(c));
+
+            return hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar;
+        }
+
+
+
     }
 }

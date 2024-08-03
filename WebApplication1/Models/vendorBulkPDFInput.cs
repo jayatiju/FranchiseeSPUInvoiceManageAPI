@@ -11,7 +11,7 @@ namespace WebApplication1.Models
         public string endDate { get; set; }
         //public string regionCode { get; set; }
 
-        public string region { get; set; }
+        //public string region { get; set; }
 
         public string vendorcode { get; set; }
     }
