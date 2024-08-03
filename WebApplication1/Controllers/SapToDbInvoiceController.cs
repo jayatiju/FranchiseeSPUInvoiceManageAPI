@@ -98,8 +98,8 @@ namespace WebApplication1.Controllers
                             client.ClientCredentials.UserName.UserName = "RFCUSER";
                             client.ClientCredentials.UserName.Password = "Init#1234";
 
-                            //   client.ClientCredentials.UserName.UserName = "BIRAJ";
-                            //   client.ClientCredentials.UserName.Password = "Ifb-123";
+                        //       client.ClientCredentials.UserName.UserName = "BIRAJ";
+                        //       client.ClientCredentials.UserName.Password = "Ifb-123";
 
 
                             // DateTime now = DateTime.Now;

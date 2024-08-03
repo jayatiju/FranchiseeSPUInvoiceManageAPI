@@ -25,6 +25,7 @@ namespace WebApplication1.Controllers
     public class SaveBulkPdfDigitalSignatureController : ApiController
     {
         ResponseCode responseCode = new ResponseCode();
+
         private readonly MySqlConnection _connection;
         public SaveBulkPdfDigitalSignatureController()
         {
@@ -47,7 +48,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                string sql = "SELECT DocumentNumber, InvoicePdfLocation FROM invoice_generation_table WHERE InvoiceDate >= @startDate AND InvoiceDate <= @endDate AND regionCode = @regionCode AND VendorCode = @vendorCode ";
+                string sql = "SELECT DocumentNumber, InvoicePdfLocation FROM invoice_generation_table WHERE InvoiceDate >= @startDate AND InvoiceDate <= @endDate AND VendorCode = @vendorCode ";
                 MySqlCommand command = new MySqlCommand(sql, _connection);
                 command.Parameters.AddWithValue("@startDate", $"{vendorBulkPDFInput.startDate}");
                 command.Parameters.AddWithValue("@endDate", $"{vendorBulkPDFInput.endDate}");
@@ -127,7 +128,8 @@ namespace WebApplication1.Controllers
                     {
                         // Define the API endpoint URL
                         var apiUrl = "https://frspuinv.ifbsupport.com/api/GetBulkPdf";
-                       // var apiUrl = "https://localhost:44361/api/GetBulkPdf";
+                     //   var apiUrl = "https://frinvui.ifbsupport.com/api/GetBulkPdf";
+                        // var apiUrl = "https://localhost:44361/api/GetBulkPdf";
 
                         // Create an anonymous object with the required structure
                         var payload = new
@@ -162,7 +164,7 @@ namespace WebApplication1.Controllers
                             VendorDS vendorDSItem = new VendorDS();
 
                             vendorDSItem.monthYear = convertToMonthYearVendor(vendorBulkPDFInput.startDate);
-                            //vendorDSItem.region = vendorBulkPDFInput.region;
+                            vendorDSItem.region = "";
                             vendorDSItem.vendorcode = vendorBulkPDFInput.vendorcode;
                             vendorDSItem.filePath = filePath;
                             vendorDSItem.fileName = fileName;
@@ -178,7 +180,7 @@ namespace WebApplication1.Controllers
                             {
                                 
                                 string insertSql = "insert into vendor_ds_table (MonthYear, RegionCode, VendorCode, FlePath, DocumentNumber, FilePathOriginal, FileName, DsStatus, TransactionNum, ErrorMessage, ReferenceNum, InvoicePdfDSStatus) " +
-                           "values (@MonthYear, @RegionCode, @VendorCode, @FlePath, @DocumentNumber, @FilePathOriginal, @FileName, '', '', '', '', '')";
+                           "values (@MonthYear, '', @VendorCode, @FlePath, @DocumentNumber, @FilePathOriginal, @FileName, '', '', '', '', '')";
 
                                 using (var insertCommand = new MySqlCommand(insertSql, _connection))
                                 {

@@ -24,6 +24,7 @@ namespace WebApplication1.Controllers
     public class getDigitalSignatureStatusController : ApiController
     {
         ResponseCode responseCode = new ResponseCode();
+
         private readonly MySqlConnection _connection;
         public getDigitalSignatureStatusController()
         {

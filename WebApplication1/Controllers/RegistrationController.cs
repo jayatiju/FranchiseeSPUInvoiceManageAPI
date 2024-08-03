@@ -296,6 +296,7 @@ namespace WebApplication1.Controllers
             bool hasSpecialChar = password.Any(c => "@#$^_()".Contains(c));
 
             return hasUpperCase && hasLowerCase && hasDigit && hasSpecialChar;
+
         }
 
 

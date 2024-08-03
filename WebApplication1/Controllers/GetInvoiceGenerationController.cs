@@ -17,6 +17,7 @@ namespace WebApplication1.Controllers
     {
         
         ResponseCode responseCode = new ResponseCode();
+
         private readonly MySqlConnection _connection;
         public GetInvoiceGenerationController()
         {
