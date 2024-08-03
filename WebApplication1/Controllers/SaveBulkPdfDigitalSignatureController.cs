@@ -25,6 +25,7 @@ namespace WebApplication1.Controllers
     public class SaveBulkPdfDigitalSignatureController : ApiController
     {
         ResponseCode responseCode = new ResponseCode();
+
         private readonly MySqlConnection _connection;
         public SaveBulkPdfDigitalSignatureController()
         {
