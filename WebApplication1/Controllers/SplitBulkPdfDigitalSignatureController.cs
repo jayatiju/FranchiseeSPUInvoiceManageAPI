@@ -45,7 +45,7 @@ namespace WebApplication1.Controllers
 
 
         [HttpPost]
-     //   public async Task<IHttpActionResult> SplitBulkPdfDigitalSignatureAsync([FromBody] vendorSplitBulkPDFInput vendorSplitBulkPDFInput)
+        //   public async Task<IHttpActionResult> SplitBulkPdfDigitalSignatureAsync([FromBody] vendorSplitBulkPDFInput vendorSplitBulkPDFInput)
         public HttpResponseMessage SplitBulkPdfDigitalSignatureAsync([FromBody] vendorSplitBulkPDFInput vendorSplitBulkPDFInput)
         {
             try
@@ -55,7 +55,7 @@ namespace WebApplication1.Controllers
                 string MonthYear = convertToMonthYearVendor(vendorSplitBulkPDFInput.startDate);
 
                 command.Parameters.AddWithValue("@MonthYear", $"{MonthYear}");
-               // command.Parameters.AddWithValue("@RegionCode", $"{vendorSplitBulkPDFInput.region}");
+                // command.Parameters.AddWithValue("@RegionCode", $"{vendorSplitBulkPDFInput.region}");
                 command.Parameters.AddWithValue("@VendorCode", $"{vendorSplitBulkPDFInput.vendorcode}");
                 command.Parameters.AddWithValue("@FileName", $"{vendorSplitBulkPDFInput.fileName}");
                 MySqlDataReader reader = command.ExecuteReader();
@@ -67,16 +67,16 @@ namespace WebApplication1.Controllers
                 {
                     VendorSplitDS vendorDSItem = new VendorSplitDS();
 
-                    vendorDSItem.monthYear = reader.GetString("MonthYear"); 
-                    vendorDSItem.region = reader.GetString("RegionCode"); 
-                    vendorDSItem.vendorcode = reader.GetString("VendorCode"); 
+                    vendorDSItem.monthYear = reader.GetString("MonthYear");
+                    vendorDSItem.region = reader.GetString("RegionCode");
+                    vendorDSItem.vendorcode = reader.GetString("VendorCode");
                     vendorDSItem.filePath = reader.GetString("FlePath");
                     vendorDSItem.documentNumber = reader.GetString("DocumentNumber");
                     vendorDSItem.filePathOriginal = reader.GetString("FilePathOriginal");
-                    vendorDSItem.fileName = reader.GetString("FileName"); 
-                   // vendorDSItem.DigitalSignatureStatus = reader.GetString("DsStatus"); 
-                   // vendorDSItem.TransactionNumber = reader.GetString("TransactionNum"); 
-                   // vendorDSItem.ErrorMessage = reader.GetString("ErrorMessage"); 
+                    vendorDSItem.fileName = reader.GetString("FileName");
+                    // vendorDSItem.DigitalSignatureStatus = reader.GetString("DsStatus"); 
+                    // vendorDSItem.TransactionNumber = reader.GetString("TransactionNum"); 
+                    // vendorDSItem.ErrorMessage = reader.GetString("ErrorMessage"); 
 
                     ListVendorDS.Add(vendorDSItem);
 
@@ -87,7 +87,7 @@ namespace WebApplication1.Controllers
 
                 String fileLocation = ListVendorDS[0].filePath;
 
-                
+
 
                 if (string.IsNullOrWhiteSpace(fileLocation) || !File.Exists(fileLocation))
                 {
@@ -230,7 +230,7 @@ namespace WebApplication1.Controllers
 
         }
 
-            private void SplitAndSavePdf(PdfDocument mergedPdfDocument, string folderPath)
+        private void SplitAndSavePdf(PdfDocument mergedPdfDocument, string folderPath)
         {
             int maxFileSize = 10 * 1024 * 1024; // 10MB
             int fileIndex = 1;

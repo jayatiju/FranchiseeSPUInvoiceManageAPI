@@ -63,9 +63,9 @@ namespace WebApplication1.Controllers
                 {
                     String FileLocation;
                     String DocumentNum;
-                        //, DigitalSigStatus;
+                    //, DigitalSigStatus;
 
-                   // DigitalSigStatus = reader.GetString("InvoicePdfDigitalSigStatus");
+                    // DigitalSigStatus = reader.GetString("InvoicePdfDigitalSigStatus");
                     FileLocation = reader.GetString("InvoicePdfLocation");
                     DocumentNum = reader.GetString("DocumentNumber");
 
@@ -87,7 +87,7 @@ namespace WebApplication1.Controllers
 
                 // Decimal documentCount1 = (decimal)(listDocumentNum.Count / 120);
 
-                int documentCount = (listDocumentNum.Count +119) / 120;
+                int documentCount = (listDocumentNum.Count + 119) / 120;
 
                 List<VendorDS> listVendorDS = new List<VendorDS>();
 
@@ -95,7 +95,7 @@ namespace WebApplication1.Controllers
                 {
                     List<String> fileLocationsTemp = new List<String>();
 
-                    int documentlimit =0;
+                    int documentlimit = 0;
                     int documentstart = 0;
 
                     if (listDocumentNum.Count <= 120)
@@ -106,10 +106,10 @@ namespace WebApplication1.Controllers
 
                     if (listDocumentNum.Count > 120)
                     {
-                        documentstart = (i-1) * 120 + 1;
+                        documentstart = (i - 1) * 120 + 1;
                         if (listDocumentNum.Count - i * 120 >= 0)
                         {
-                            documentlimit = i * 120;                      
+                            documentlimit = i * 120;
                         }
                         else
                         {
@@ -117,18 +117,18 @@ namespace WebApplication1.Controllers
                         }
                     }
 
-                    for (var j = documentstart-1; j < documentlimit; j++)
+                    for (var j = documentstart - 1; j < documentlimit; j++)
                     {
                         fileLocationsTemp.Add(fileLocations[j]);
                     }
-                   // string jsonFileLocations = JsonConvert.SerializeObject(fileLocationsTemp);
+                    // string jsonFileLocations = JsonConvert.SerializeObject(fileLocationsTemp);
 
                     // Create an instance of HttpClient
                     using (var httpClient = new HttpClient())
                     {
                         // Define the API endpoint URL
                         var apiUrl = "https://frspuinv.ifbsupport.com/api/GetBulkPdf";
-                     //   var apiUrl = "https://frinvui.ifbsupport.com/api/GetBulkPdf";
+                        //   var apiUrl = "https://frinvui.ifbsupport.com/api/GetBulkPdf";
                         // var apiUrl = "https://localhost:44361/api/GetBulkPdf";
 
                         // Create an anonymous object with the required structure
@@ -154,11 +154,11 @@ namespace WebApplication1.Controllers
                             var responseContent = await response.Content.ReadAsByteArrayAsync();
 
                             // Save the PDF to a folder location
-                           
+
                             string fileName = $"MergedPDF_{convertToMonthYearVendor(vendorBulkPDFInput.startDate)}_{vendorBulkPDFInput.vendorcode}_{i}.pdf";
                             string filePath = Path.Combine(folderPathNew, fileName);
 
-                           
+
                             File.WriteAllBytes(filePath, responseContent);
 
                             VendorDS vendorDSItem = new VendorDS();
@@ -176,9 +176,9 @@ namespace WebApplication1.Controllers
 
                             listVendorDS.Add(vendorDSItem);
 
-                            for (var j = documentstart-1; j < documentlimit; j++)
+                            for (var j = documentstart - 1; j < documentlimit; j++)
                             {
-                                
+
                                 string insertSql = "insert into vendor_ds_table (MonthYear, RegionCode, VendorCode, FlePath, DocumentNumber, FilePathOriginal, FileName, DsStatus, TransactionNum, ErrorMessage, ReferenceNum, InvoicePdfDSStatus) " +
                            "values (@MonthYear, '', @VendorCode, @FlePath, @DocumentNumber, @FilePathOriginal, @FileName, '', '', '', '', '')";
 
@@ -224,7 +224,7 @@ namespace WebApplication1.Controllers
 
         }
 
-       
+
 
         private void SplitAndSavePdf(PdfDocument mergedPdfDocument, string folderPath)
         {
