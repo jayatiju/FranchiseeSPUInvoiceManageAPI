@@ -48,7 +48,7 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                string sql = "SELECT DocumentNumber, InvoicePdfLocation FROM invoice_generation_table WHERE InvoiceDate >= @startDate AND InvoiceDate <= @endDate AND VendorCode = @vendorCode ";
+                string sql = "SELECT DocumentNumber, InvoicePdfLocation FROM invoice_generation_table WHERE InvoiceDate >= @startDate AND InvoiceDate <= @endDate AND regionCode = @regionCode AND VendorCode = @vendorCode ";
                 MySqlCommand command = new MySqlCommand(sql, _connection);
                 command.Parameters.AddWithValue("@startDate", $"{vendorBulkPDFInput.startDate}");
                 command.Parameters.AddWithValue("@endDate", $"{vendorBulkPDFInput.endDate}");
@@ -128,7 +128,7 @@ namespace WebApplication1.Controllers
                     {
                         // Define the API endpoint URL
                         var apiUrl = "https://frspuinv.ifbsupport.com/api/GetBulkPdf";
-                        //   var apiUrl = "https://frinvui.ifbsupport.com/api/GetBulkPdf";
+                     //   var apiUrl = "https://frinvui.ifbsupport.com/api/GetBulkPdf";
                         // var apiUrl = "https://localhost:44361/api/GetBulkPdf";
 
                         // Create an anonymous object with the required structure
