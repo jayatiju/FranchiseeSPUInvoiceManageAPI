@@ -128,7 +128,7 @@ namespace WebApplication1.Controllers
                     {
                         // Define the API endpoint URL
                         var apiUrl = "https://frspuinv.ifbsupport.com/api/GetBulkPdf";
-                        //   var apiUrl = "https://frinvui.ifbsupport.com/api/GetBulkPdf";
+                     //   var apiUrl = "https://frinvui.ifbsupport.com/api/GetBulkPdf";
                         // var apiUrl = "https://localhost:44361/api/GetBulkPdf";
 
                         // Create an anonymous object with the required structure

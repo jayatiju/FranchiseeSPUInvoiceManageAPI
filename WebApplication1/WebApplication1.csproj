@@ -465,6 +465,7 @@
     <Compile Include="Controllers\GetPdfController.cs" />
     <Compile Include="Controllers\GetPDFSignedController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InvoiceGenerationDataMigrationController.cs" />
     <Compile Include="Controllers\InvoiceGenerationController.cs" />
     <Compile Include="Controllers\InvoiceStatusController.cs" />
     <Compile Include="Controllers\InvoiceUpdateSAPController.cs" />
@@ -519,6 +520,7 @@
     <Compile Include="Models\emSignerResponse.cs" />
     <Compile Include="Models\ErrorViewModel.cs" />
     <Compile Include="Models\InvoiceError.cs" />
+    <Compile Include="Models\InvoiceGenerationDataMigrationInput.cs" />
     <Compile Include="Models\InvoiceGenerationInput.cs" />
     <Compile Include="Models\InvoiceGenerationOutput.cs" />
     <Compile Include="Models\InvoiceInput.cs" />
