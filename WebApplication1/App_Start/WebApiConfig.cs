@@ -17,7 +17,7 @@ namespace WebApplication1
             //  var cors = new EnableCorsAttribute("https://frspuinv.ifbsupport.com:8080", "Content-Type, X-Your-Extra-Header-Key", "GET,POST,PUT,DELETE,OPTIONS");
             //  var cors = new EnableCorsAttribute("https://192.168.52.187:8080", "Content-Type, X-Your-Extra-Header-Key", "GET,POST,PUT,DELETE,OPTIONS");
 
-            var cors = new EnableCorsAttribute("*", "Content-Type, X-Your-Extra-Header-Key", "GET,POST,PUT,DELETE,OPTIONS");
+            var cors = new EnableCorsAttribute("http://localhost:8081", "Content-Type, X-Your-Extra-Header-Key", "GET,POST,PUT,DELETE,OPTIONS");
           config.EnableCors(cors);
             
             // Web API routes

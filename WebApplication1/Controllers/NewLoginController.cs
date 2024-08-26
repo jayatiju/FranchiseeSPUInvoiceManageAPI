@@ -11,7 +11,7 @@ using Newtonsoft.Json;
 
 namespace WebApplication1.Controllers
 {
-    [EnableCors("*", "*", "*")] // Enable CORS for the entire controller
+   // [EnableCors("*", "*", "*")] // Enable CORS for the entire controller
     public class NewLoginController : ApiController
     {
         
