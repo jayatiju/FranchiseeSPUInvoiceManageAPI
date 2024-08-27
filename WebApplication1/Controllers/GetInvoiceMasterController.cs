@@ -40,15 +40,16 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                string updateSql = @"UPDATE invoice_master_table im
-                               JOIN invoice_generation_table ig ON im.Document_Number = ig.DocumentNumber
-                                SET im.Invoice_Number = ig.InvoiceNumber";
-                MySqlCommand updateCommand = new MySqlCommand(updateSql, _connection);
 
-                // Execute the update command
-                updateCommand.ExecuteNonQuery();
-                string fetchSql = "SELECT * FROM invoice_master_table WHERE Document_Date >= @startDate AND Document_Date <= @endDate  AND Vendor_Code = @vendorCode ";
-                MySqlCommand command = new MySqlCommand(fetchSql, _connection);
+                // string fetchSql = "SELECT * FROM invoice_master_table WHERE Document_Date >= @startDate AND Document_Date <= @endDate  AND Vendor_Code = @vendorCode ";
+                string Sql = @"SELECT im.*, ig.InvoiceNumber
+                            FROM invoice_master_table im
+                            LEFT JOIN invoice_generation_table ig
+                            ON im.Document_Number = ig.DocumentNumber
+                            WHERE im.Document_Date >= @startDate
+                            AND im.Document_Date <= @endDate
+                            AND im.Vendor_Code = @vendorCode";
+                MySqlCommand command = new MySqlCommand(Sql, _connection);
                 command.Parameters.AddWithValue("@startDate", $"{startdate}");
                 command.Parameters.AddWithValue("@endDate", $"{enddate}");
                 command.Parameters.AddWithValue("@vendorCode", $"{vendorcode}");
@@ -111,7 +112,9 @@ namespace WebApplication1.Controllers
 
                     invoiceMasterOutput.UGST_RCM = reader.GetString("UGST_RCM");
                     invoiceMasterOutput.SGST_RCM = reader.GetString("SGST_RCM");
-                    invoiceMasterOutput.Invoice_Number = reader.GetString("Invoice_Number");
+                    //invoiceMasterOutput.Invoice_Number = reader.GetString("Invoice_Number");
+                    invoiceMasterOutput.Invoice_Number = reader.IsDBNull(reader.GetOrdinal("InvoiceNumber")) ? "N/A" : reader.GetString("InvoiceNumber");
+
                     invoiceMasterOutput.FG_Product_Code = reader.GetString("FG_Product_Code");
                     invoiceMasterOutput.FG_Product_Name = reader.GetString("FG_Product_Name");
                     invoiceMasterOutput.Ship_To_Party_MobileNumber = reader.GetString("Ship_To_Party_MobileNumber");
@@ -145,16 +148,13 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                string updateSql = @"UPDATE invoice_master_table im
-                               JOIN invoice_generation_table ig ON im.Document_Number = ig.DocumentNumber
-                                SET im.Invoice_Number = ig.InvoiceNumber";
-                MySqlCommand updateCommand = new MySqlCommand(updateSql, _connection);
 
-                // Execute the update command
-                updateCommand.ExecuteNonQuery();
-
-                string fetchSql = "SELECT * FROM invoice_master_table WHERE Document_Date >= @startDate AND Document_Date <= @endDate AND Segment = @segmentCode AND Vendor_Code = @vendorCode ";
-                MySqlCommand command = new MySqlCommand(fetchSql, _connection);
+                string Sql = @"SELECT im.*, ig.InvoiceNumber
+                            FROM invoice_master_table im
+                            LEFT JOIN invoice_generation_table ig
+                            ON im.Document_Number = ig.DocumentNumber
+                            im.Segment = @segmentCode AND im.Vendor_Code = @vendorCode ";
+                MySqlCommand command = new MySqlCommand(Sql, _connection);
                 command.Parameters.AddWithValue("@startDate", $"{startdate}");
                 command.Parameters.AddWithValue("@endDate", $"{enddate}");
                 command.Parameters.AddWithValue("@segmentCode", $"{segment}");
@@ -218,7 +218,9 @@ namespace WebApplication1.Controllers
 
                     invoiceMasterOutput.UGST_RCM = reader.GetString("UGST_RCM");
                     invoiceMasterOutput.SGST_RCM = reader.GetString("SGST_RCM");
-                    invoiceMasterOutput.Invoice_Number = reader.GetString("Invoice_Number");
+                    //invoiceMasterOutput.Invoice_Number = reader.GetString("Invoice_Number");
+                    invoiceMasterOutput.Invoice_Number = reader.IsDBNull(reader.GetOrdinal("InvoiceNumber")) ? "N/A" : reader.GetString("InvoiceNumber");
+
                     invoiceMasterOutput.FG_Product_Code = reader.GetString("FG_Product_Code");
                     invoiceMasterOutput.FG_Product_Name = reader.GetString("FG_Product_Name");
                     invoiceMasterOutput.Ship_To_Party_MobileNumber = reader.GetString("Ship_To_Party_MobileNumber");
@@ -250,15 +252,15 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                string updateSql = @"UPDATE invoice_master_table im
-                               JOIN invoice_generation_table ig ON im.Document_Number = ig.DocumentNumber
-                                SET im.Invoice_Number = ig.InvoiceNumber";
-                MySqlCommand updateCommand = new MySqlCommand(updateSql, _connection);
 
-                // Execute the update command
-                updateCommand.ExecuteNonQuery();
-                string fetchSql = "SELECT * FROM invoice_master_table WHERE Document_Date >= @startDate AND Document_Date <= @endDate AND Region_Code = @regionCode";
-                MySqlCommand command = new MySqlCommand(fetchSql, _connection);
+                string Sql = @"SELECT im.*, ig.InvoiceNumber
+                            FROM invoice_master_table im
+                            LEFT JOIN invoice_generation_table ig
+                            ON im.Document_Number = ig.DocumentNumber
+                            WHERE im.Document_Date >= @startDate
+                            AND im.Document_Date <= @endDate
+                            AND im.Region_Code = @regionCode";
+                MySqlCommand command = new MySqlCommand(Sql, _connection);
                 command.Parameters.AddWithValue("@startDate", $"{startdate}");
                 command.Parameters.AddWithValue("@endDate", $"{enddate}");
                 command.Parameters.AddWithValue("@regionCode", $"{region}");
@@ -323,7 +325,8 @@ namespace WebApplication1.Controllers
 
                     invoiceMasterOutput.UGST_RCM = reader.GetString("UGST_RCM");
                     invoiceMasterOutput.SGST_RCM = reader.GetString("SGST_RCM");
-                    invoiceMasterOutput.Invoice_Number = reader.GetString("Invoice_Number");
+                    //invoiceMasterOutput.Invoice_Number = reader.GetString("Invoice_Number");
+                    invoiceMasterOutput.Invoice_Number = reader.IsDBNull(reader.GetOrdinal("InvoiceNumber")) ? "N/A" : reader.GetString("InvoiceNumber");
                     invoiceMasterOutput.FG_Product_Code = reader.GetString("FG_Product_Code");
                     invoiceMasterOutput.FG_Product_Name = reader.GetString("FG_Product_Name");
                     invoiceMasterOutput.Ship_To_Party_MobileNumber = reader.GetString("Ship_To_Party_MobileNumber");
@@ -359,15 +362,15 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                string updateSql = @"UPDATE invoice_master_table im
-                               JOIN invoice_generation_table ig ON im.Document_Number = ig.DocumentNumber
-                                SET im.Invoice_Number = ig.InvoiceNumber";
-                MySqlCommand updateCommand = new MySqlCommand(updateSql, _connection);
 
-                // Execute the update command
-                updateCommand.ExecuteNonQuery();
-                string fetchSql = "SELECT * FROM invoice_master_table WHERE Document_Date >= @startDate AND Document_Date <= @endDate AND Segment = @segmentCode";
-                MySqlCommand command = new MySqlCommand(fetchSql, _connection);
+                string Sql = @"SELECT im.*, ig.InvoiceNumber
+                            FROM invoice_master_table im
+                            LEFT JOIN invoice_generation_table ig
+                            ON im.Document_Number = ig.DocumentNumber
+                            WHERE im.Document_Date >= @startDate
+                            AND im.Document_Date <= @endDate
+                            AND im.Segment = @segmentCode";
+                MySqlCommand command = new MySqlCommand(Sql, _connection);
                 command.Parameters.AddWithValue("@startDate", $"{startdate}");
                 command.Parameters.AddWithValue("@endDate", $"{enddate}");
                 command.Parameters.AddWithValue("@segmentCode", $"{segment}");
@@ -434,7 +437,9 @@ namespace WebApplication1.Controllers
 
                     invoiceMasterOutput.UGST_RCM = reader.GetString("UGST_RCM");
                     invoiceMasterOutput.SGST_RCM = reader.GetString("SGST_RCM");
-                    invoiceMasterOutput.Invoice_Number = reader.GetString("Invoice_Number");
+                    //invoiceMasterOutput.Invoice_Number = reader.GetString("Invoice_Number");
+                    invoiceMasterOutput.Invoice_Number = reader.IsDBNull(reader.GetOrdinal("InvoiceNumber")) ? "N/A" : reader.GetString("InvoiceNumber");
+
                     invoiceMasterOutput.FG_Product_Code = reader.GetString("FG_Product_Code");
                     invoiceMasterOutput.FG_Product_Name = reader.GetString("FG_Product_Name");
                     invoiceMasterOutput.Ship_To_Party_MobileNumber = reader.GetString("Ship_To_Party_MobileNumber");
