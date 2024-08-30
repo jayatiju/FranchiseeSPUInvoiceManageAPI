@@ -279,11 +279,11 @@ namespace WebApplication1.Controllers
                 {
                     ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
 
-                    client.ClientCredentials.UserName.UserName = "RFCUSER";
-                    client.ClientCredentials.UserName.Password = "Init#1234";
+                 //   client.ClientCredentials.UserName.UserName = "RFCUSER";
+                 //   client.ClientCredentials.UserName.Password = "Init#1234";
 
-                //    client.ClientCredentials.UserName.UserName = "BIRAJ";
-                //    client.ClientCredentials.UserName.Password = "Ifb-123";
+                    client.ClientCredentials.UserName.UserName = "BIRAJ";
+                    client.ClientCredentials.UserName.Password = "Ifb-123";
 
 
                     ZSPU_INVOICE_UPD_STR[] invoiceArray = new ZSPU_INVOICE_UPD_STR[dbToSapInputs.Count];

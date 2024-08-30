@@ -687,6 +687,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\InvoiceCountStatusController.cs" />
     <Compile Include="Controllers\GetInvoiceMasterController.cs" />
     <Compile Include="Controllers\CustomerDeactivationController.cs" />
     <Compile Include="Controllers\CustomerMasterController.cs" />

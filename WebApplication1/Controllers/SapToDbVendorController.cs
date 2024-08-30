@@ -51,11 +51,11 @@ namespace WebApplication1.Controllers
 
                         ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
 
-                        client.ClientCredentials.UserName.UserName = "RFCUSER";
-                        client.ClientCredentials.UserName.Password = "Init#1234";
+                    //    client.ClientCredentials.UserName.UserName = "RFCUSER";
+                    //    client.ClientCredentials.UserName.Password = "Init#1234";
 
-                    //    client.ClientCredentials.UserName.UserName = "BIRAJ";
-                    //    client.ClientCredentials.UserName.Password = "Ifb-123";
+                        client.ClientCredentials.UserName.UserName = "BIRAJ";
+                        client.ClientCredentials.UserName.Password = "Ifb-123";
 
                         var request = new ZFM_SPU_VENDORSRequest
                         {
