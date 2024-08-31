@@ -88,32 +88,8 @@ namespace WebApplication1.Controllers
                 String fileLocation = ListVendorDS[0].filePath;
 
 
-
-                if (string.IsNullOrWhiteSpace(fileLocation) || !File.Exists(fileLocation))
-                {
-                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid file location.");
-                }
-
-                // Read the PDF file into a byte array
-                byte[] pdfBytes = File.ReadAllBytes(fileLocation);
-
-                // Create a HttpResponseMessage with the PDF data
-                HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
-                {
-                    Content = new ByteArrayContent(pdfBytes)
-                };
-
-                response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
-                {
-                    FileName = Path.GetFileName(fileLocation)
-                };
-
-                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
-
-                return response;
-
                 //PdfDocument inputPdf = new PdfDocument(new PdfReader(ListVendorDS[0].filePath));
-                /*
+                
                 PdfReader pdfReader = new PdfReader(ListVendorDS[0].filePath);
                 pdfReader.SetUnethicalReading(true);
 
@@ -125,7 +101,7 @@ namespace WebApplication1.Controllers
                 {
                     string outputFilePath = ListVendorDS[i - 1].filePathOriginal;
 
-                    using (MemoryStream splitPdfStream = new MemoryStream())
+                   /* using (MemoryStream splitPdfStream = new MemoryStream())
                     {
                         // Initialize PDF writer
                         PdfWriter writer = new PdfWriter(splitPdfStream);
@@ -152,7 +128,7 @@ namespace WebApplication1.Controllers
                         var responseContent = await response.Content.ReadAsByteArrayAsync();
 
                         File.WriteAllBytes(ListVendorDS[i - 1].filePathOriginal, responseContent);
-
+                   */
 
                         string statusSql = "UPDATE vendor_ds_table SET InvoicePdfDSStatus=@InvoicePdfDSStatus WHERE DocumentNumber = @DocumentNumber ;";
                         // string monthYear = convertToMonthYear(invoiceGenerationInput.startDate);
@@ -175,16 +151,43 @@ namespace WebApplication1.Controllers
 
                             statuscommandInvGen.ExecuteNonQuery();
                         }
-                    }
+                  //  }
                    
                 }
 
                 mergedpdf.Close();
-               
 
-                responseCode.messageCode = "S";
-                responseCode.messageString = "All PDFs saved with Digital Signature!";
-                return Ok(responseCode);*/
+
+
+
+
+                if (string.IsNullOrWhiteSpace(fileLocation) || !File.Exists(fileLocation))
+                {
+                    return Request.CreateErrorResponse(HttpStatusCode.BadRequest, "Invalid file location.");
+                }
+
+                // Read the PDF file into a byte array
+                byte[] pdfBytes = File.ReadAllBytes(fileLocation);
+
+                // Create a HttpResponseMessage with the PDF data
+                HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+                {
+                    Content = new ByteArrayContent(pdfBytes)
+                };
+
+                response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment")
+                {
+                    FileName = Path.GetFileName(fileLocation)
+                };
+
+                response.Content.Headers.ContentType = new MediaTypeHeaderValue("application/pdf");
+
+                return response;
+
+
+                /*  responseCode.messageCode = "S";
+                  responseCode.messageString = "All PDFs saved with Digital Signature!";
+                  return Ok(responseCode);*/
 
             }
             catch (Exception ex)
