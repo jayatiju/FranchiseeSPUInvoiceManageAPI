@@ -11,6 +11,8 @@ using System.Web.Http.Cors;
 using MySql.Data.MySqlClient;
 using System.Net.Http;
 using Newtonsoft.Json;
+using System.Text;
+using System.IO;
 using System.Threading.Tasks;
 using WebApplication1.InvoiceUpdateReference;
 using System.Globalization;
@@ -275,6 +277,60 @@ namespace WebApplication1.Controllers
 
                 readerDbToSap.Close();
 
+                StringBuilder csvData1 = new StringBuilder();
+                csvData1.AppendLine("DocumentNumber,FY");
+
+                foreach (var invoice in dbToSapInputs)
+                {
+                    csvData1.AppendLine($"{invoice.document},{invoice.fy}");
+                }
+                /*
+                string csvData = csvData1.ToString();
+
+                string fileName = $"InvoiceData_{invoiceGenerationInput.segment}_{monthYear}.csv";
+                string localFilePath = Path.Combine(Path.GetTempPath(), fileName);
+                System.IO.File.WriteAllText(localFilePath, csvData);
+
+                string ftpServer = "ftp://192.168.52.237/"; // FTP server URL
+                string ftpUsername = "SPUINT";
+                string ftpPassword = "$J$#2501j";
+
+                string directoryName = $"{monthYear}-{invoiceGenerationInput.segment}";
+
+                string ftpDirectoryUrl = ftpServer + directoryName + "/";
+
+                string ftpFullUrl = ftpDirectoryUrl + fileName;
+
+                FtpWebRequest directoryRequest = (FtpWebRequest)WebRequest.Create(ftpDirectoryUrl);
+                directoryRequest.Method = WebRequestMethods.Ftp.MakeDirectory;
+                directoryRequest.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+                directoryRequest.UsePassive = true;
+                directoryRequest.UseBinary = true;
+                directoryRequest.KeepAlive = false;
+
+
+                FtpWebRequest request = (FtpWebRequest)WebRequest.Create(ftpFullUrl);
+                request.Method = WebRequestMethods.Ftp.UploadFile;
+                request.Credentials = new NetworkCredential(ftpUsername, ftpPassword);
+                request.UseBinary = true;
+                request.UsePassive = true;
+                request.KeepAlive = false;
+
+                byte[] fileContents = System.IO.File.ReadAllBytes(localFilePath);
+                request.ContentLength = fileContents.Length;
+
+                using (Stream requestStream = request.GetRequestStream())
+                {
+                    requestStream.Write(fileContents, 0, fileContents.Length);
+                }
+
+                using (FtpWebResponse response = (FtpWebResponse)request.GetResponse())
+                {
+                    Console.WriteLine($"Upload Status: {response.StatusDescription}");
+                }
+
+                */
+                /*
                 using (ZWS_SPU_INVOICE_POST_SRVClient client = new ZWS_SPU_INVOICE_POST_SRVClient("postlist_soap12"))
                 {
                     ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
@@ -372,9 +428,10 @@ namespace WebApplication1.Controllers
 
 
                 }
+                */
 
-                
-
+                responseCode.messageCode = "S";
+                responseCode.messageString = "All invoice created in the portal and counter updated!";
                 return Ok(responseCode);
             }
             catch(Exception e)

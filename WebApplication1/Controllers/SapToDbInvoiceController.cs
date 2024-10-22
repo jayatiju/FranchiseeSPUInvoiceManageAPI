@@ -10,6 +10,12 @@ using System.ServiceModel;
 using System.Web.Http.Cors;
 using MySql.Data.MySqlClient;
 using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Configuration;
+using FluentFTP;
+using System.Data;
+
 
 namespace WebApplication1.Controllers
 {
@@ -41,9 +47,10 @@ namespace WebApplication1.Controllers
 
             try
             {
+                
                 string prevMonthYear = ConvertToPreviousMonthYear(invoiceInput.StartDate);
                 string sql1 = "SELECT Data_Sync_Flag, Invoice_Number_Generation_Flag, Invoice_PDF_Generation_Flag FROM invoice_monthly_status WHERE Month_Year = @monthYear AND Segment = @segment";
-
+                string monthYear = convertToMonthYear(invoiceInput.StartDate);
                 string dataSyncFlag = "";
                 string invoiceNumberFlag = "";
                 string invoicePdfFlag = "";
@@ -67,12 +74,12 @@ namespace WebApplication1.Controllers
                         }
                     }
                 }
-
+                
                 if (dataSyncFlag != "" || invoiceNumberFlag != "" || invoicePdfFlag != "")
                 {
 
                     string statusSql = "INSERT INTO invoice_monthly_status (Month_Year, Region, Data_Sync_Flag, Invoice_Number_Generation_Flag, Invoice_PDF_Generation_Flag, Segment) VALUES(@Month_Year, @Region, 'IP', '', '', @Segment)";
-                    string monthYear = convertToMonthYear(invoiceInput.StartDate);
+                    
                     using (var statuscommand = new MySqlCommand(statusSql, _connection))
                     {
                         statuscommand.Parameters.AddWithValue("@Month_Year", monthYear);
@@ -88,51 +95,54 @@ namespace WebApplication1.Controllers
                     String FyNow = convertToYear(invoiceInput.StartDate);
 
                     //data sync
-                    using (ZWS_SPU_PUR_SRVClient client = new ZWS_SPU_PUR_SRVClient("invoices_soap12"))
+                    /*   using (ZWS_SPU_PUR_SRVClient client = new ZWS_SPU_PUR_SRVClient("invoices_soap12"))
+                       {
+                           try
+                           {
+
+                               ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
+
+                               client.ClientCredentials.UserName.UserName = "RFCUSER";
+                               client.ClientCredentials.UserName.Password = "Init#1234";
+
+                            //      client.ClientCredentials.UserName.UserName = "BIRAJ";
+                            //      client.ClientCredentials.UserName.Password = "Ifb-123";
+
+
+                               // DateTime now = DateTime.Now;
+
+
+
+
+                               var requestObject = new ZfmSpuPurRequest
+                               {
+
+                                   ZfmSpuPur = new ZfmSpuPur()
+                                   {
+
+                                       CompanyCode = invoiceInput.CompanyCode,
+                                       DocumentNumber = invoiceInput.DocumentNumber,
+                                       EndDate = invoiceInput.EndDate,
+                                      // FiscalYear = invoiceInput.FiscalYear,
+                                       FiscalYear = FyNow,
+                                      // FiscalYear = convertToYear(invoiceInput.StartDate),
+                                       SegmentCode = invoiceInput.SegmentCode,
+                                       StartDate = invoiceInput.StartDate
+
+                                   }
+                               };
+
+                               ZfmSpuPurResponse response = client.ZfmSpuPur(requestObject.ZfmSpuPur);
+
+                               // Check if response is null or has no data
+                    */
+                   
+                    DataTable dtCsv = ExecuteDataTable();
+                    if (dtCsv == null || dtCsv.Rows.Count == 0)
                     {
-                        try
-                        {
-
-                            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-
-                            client.ClientCredentials.UserName.UserName = "RFCUSER";
-                            client.ClientCredentials.UserName.Password = "Init#1234";
-
-                         //      client.ClientCredentials.UserName.UserName = "BIRAJ";
-                         //      client.ClientCredentials.UserName.Password = "Ifb-123";
-
-
-                            // DateTime now = DateTime.Now;
-                            
-
-
-
-                            var requestObject = new ZfmSpuPurRequest
-                            {
-
-                                ZfmSpuPur = new ZfmSpuPur()
-                                {
-
-                                    CompanyCode = invoiceInput.CompanyCode,
-                                    DocumentNumber = invoiceInput.DocumentNumber,
-                                    EndDate = invoiceInput.EndDate,
-                                   // FiscalYear = invoiceInput.FiscalYear,
-                                    FiscalYear = FyNow,
-                                   // FiscalYear = convertToYear(invoiceInput.StartDate),
-                                    SegmentCode = invoiceInput.SegmentCode,
-                                    StartDate = invoiceInput.StartDate
-
-                                }
-                            };
-
-                            ZfmSpuPurResponse response = client.ZfmSpuPur(requestObject.ZfmSpuPur);
-
-                            // Check if response is null or has no data
-                            if (response == null || response.EtSpu == null || !response.EtSpu.Any())
-                            {
                                 responseCode.messageCode = "E";
                                 responseCode.messageString = "No data to sync for invoice";
-
+                        
                                 string statusDelSql = "DELETE FROM invoice_monthly_status WHERE Month_Year = @Month_Year AND Segment = @Segment AND Region = @Region";
 
                                 using (var statusDelcommand = new MySqlCommand(statusDelSql, _connection))
@@ -146,80 +156,86 @@ namespace WebApplication1.Controllers
 
 
                                 }
-
+                                
                                 return responseCode;
                             }
                             else
                             {
-                                foreach (var sapInvoice in response.EtSpu)
-                                {
+                        //     string fileContent = Encoding.UTF8.GetString(fileContents);
 
 
-                                    string sql = "INSERT INTO invoice_master_table (Segment, Region_Code, Plant_Code, Financial_Year, GSTIN, Document_Number, Document_Date, Document_Posting_Date, Sales_Doc_Number, Ship_To_Party_Number, Ship_To_Party_Name, Pin, City, Address_1, Address_2, Address_3, Vendor_Code, Vendor_Name, Spu_Number, CRM_Ticket_Number, Machine_Status, COGS, Material_Code, Material_Group, Material_Description, HSN, Tax_Percentage, Quantity, UOM, Spare_Value, Currency, Assignment_Date, Tax_Code, CGST_Percentage, CGST_RCM, CGST, IGST_Percentage, IGST, Import_IGST, IGST_RCM, SGST_Percentage, SGST, UGST_Percentage, UGST, UGST_RCM, SGST_RCM, Invoice_Number, FG_Product_Code, FG_Product_Name, Ship_To_Party_MobileNumber, Ship_To_Party_Region, Ship_To_Party_Region_Desc) " +
+                        // Split content by lines (assuming each line is a row in the CSV)
+                        //      var lines = fileContent.Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries);
+
+                        //   foreach (var line in lines)
+                        foreach (DataRow row in dtCsv.Rows)
+                        {
+                           // var columns = line.Split(',');
+
+                            string sql = "INSERT INTO invoice_master_table (Segment, Region_Code, Plant_Code, Financial_Year, GSTIN, Document_Number, Document_Date, Document_Posting_Date, Sales_Doc_Number, Ship_To_Party_Number, Ship_To_Party_Name, Pin, City, Address_1, Address_2, Address_3, Vendor_Code, Vendor_Name, Spu_Number, CRM_Ticket_Number, Machine_Status, COGS, Material_Code, Material_Group, Material_Description, HSN, Tax_Percentage, Quantity, UOM, Spare_Value, Currency, Assignment_Date, Tax_Code, CGST_Percentage, CGST_RCM, CGST, IGST_Percentage, IGST, Import_IGST, IGST_RCM, SGST_Percentage, SGST, UGST_Percentage, UGST, UGST_RCM, SGST_RCM, Invoice_Number, FG_Product_Code, FG_Product_Name, Ship_To_Party_MobileNumber, Ship_To_Party_Region, Ship_To_Party_Region_Desc) " +
                                         "VALUES (@Segment, @Region_Code, @Plant_Code, @Financial_Year, @GSTIN, @Document_Number, @Document_Date, @Document_Posting_Date, @Sales_Doc_Number, @Ship_To_Party_Number, @Ship_To_Party_Name, @Pin, @City, @Address_1, @Address_2, @Address_3, @Vendor_Code, @Vendor_Name, @Spu_Number, @CRM_Ticket_Number, @Machine_Status, @COGS, @Material_Code, @Material_Group, @Material_Description, @HSN, @Tax_Percentage, @Quantity, @UOM, @Spare_Value, @Currency, @Assignment_Date, @Tax_Code, @CGST_Percentage, @CGST_RCM, @CGST, @IGST_Percentage, @IGST, @Import_IGST, @IGST_RCM, @SGST_Percentage, @SGST, @UGST_Percentage, @UGST, @UGST_RCM, @SGST_RCM, @Invoice_Number, @FG_Product_Code, @FG_Product_Name, @Ship_To_Party_MobileNumber, @Ship_To_Party_Region, @Ship_To_Party_Region_Desc);";
 
                                     using (var command = new MySqlCommand(sql, _connection))
                                     {
                                         // Assuming you have a SqlCommand object named 'command' and a 'sapInvoice' object containing the values
-                                        String segment = sapInvoice.Segment;
-                                        segment = segment.TrimStart('0');
-                                        command.Parameters.AddWithValue("@Segment", segment);
-                                        command.Parameters.AddWithValue("@Region_Code", sapInvoice.Region);
-                                        command.Parameters.AddWithValue("@Plant_Code", sapInvoice.Plant);
-                                        command.Parameters.AddWithValue("@Financial_Year", sapInvoice.Fy);
-                                        command.Parameters.AddWithValue("@GSTIN", sapInvoice.Gstin);
-                                        command.Parameters.AddWithValue("@Document_Number", sapInvoice.Document);
-                                        command.Parameters.AddWithValue("@Document_Date", sapInvoice.DocDate);
-                                        command.Parameters.AddWithValue("@Document_Posting_Date", sapInvoice.PostDate);
-                                        command.Parameters.AddWithValue("@Sales_Doc_Number", sapInvoice.SalesDoc);
-                                        command.Parameters.AddWithValue("@Ship_To_Party_Number", sapInvoice.ShipToParty);
-                                        command.Parameters.AddWithValue("@Ship_To_Party_Name", sapInvoice.ShipToPartyName);
-                                        command.Parameters.AddWithValue("@Pin", sapInvoice.Pincode);
-                                        command.Parameters.AddWithValue("@City", sapInvoice.City);
-                                        command.Parameters.AddWithValue("@Address_1", sapInvoice.Street2);
-                                        command.Parameters.AddWithValue("@Address_2", sapInvoice.Street);
-                                        command.Parameters.AddWithValue("@Address_3", sapInvoice.Street3);
-                                        command.Parameters.AddWithValue("@Vendor_Code", sapInvoice.Vendor);
-                                        command.Parameters.AddWithValue("@Vendor_Name", sapInvoice.VendorName);
-                                        command.Parameters.AddWithValue("@Spu_Number", sapInvoice.SpuNo);
-                                        command.Parameters.AddWithValue("@CRM_Ticket_Number", sapInvoice.CrmTicket);
-                                        command.Parameters.AddWithValue("@Machine_Status", sapInvoice.MachStat);
-                                        command.Parameters.AddWithValue("@COGS", sapInvoice.Cogs);
-                                        command.Parameters.AddWithValue("@Material_Code", sapInvoice.Material);
-                                        command.Parameters.AddWithValue("@Material_Group", sapInvoice.MaterialGrp);
-                                        command.Parameters.AddWithValue("@Material_Description", sapInvoice.MatDes);
-                                        command.Parameters.AddWithValue("@HSN", sapInvoice.Hsn);
-                                        command.Parameters.AddWithValue("@Tax_Percentage", sapInvoice.Taxpercent);
-                                        command.Parameters.AddWithValue("@Quantity", sapInvoice.Quantity);
-                                        command.Parameters.AddWithValue("@UOM", sapInvoice.Unit);
-                                        command.Parameters.AddWithValue("@Spare_Value", sapInvoice.Spare);
-                                        command.Parameters.AddWithValue("@Currency", sapInvoice.Currency);
-                                        command.Parameters.AddWithValue("@Assignment_Date", sapInvoice.Assignment);
-                                        command.Parameters.AddWithValue("@Tax_Code", sapInvoice.TaxCode);
-                                        command.Parameters.AddWithValue("@CGST_Percentage", sapInvoice.CgstPer);
-                                        command.Parameters.AddWithValue("@CGST_RCM", sapInvoice.CgstRcm);
-                                        command.Parameters.AddWithValue("@CGST", sapInvoice.Cgst);
-                                        command.Parameters.AddWithValue("@IGST_Percentage", sapInvoice.IgstPer);
-                                        command.Parameters.AddWithValue("@IGST", sapInvoice.Igst);
-                                        command.Parameters.AddWithValue("@Import_IGST", sapInvoice.ImportIgst);
-                                        command.Parameters.AddWithValue("@IGST_RCM", sapInvoice.IgstRcm);
-                                        command.Parameters.AddWithValue("@SGST_Percentage", sapInvoice.SgstPer);
-                                        command.Parameters.AddWithValue("@SGST", sapInvoice.Sgst);
-                                        command.Parameters.AddWithValue("@UGST_Percentage", sapInvoice.UgstPer);
-                                        command.Parameters.AddWithValue("@UGST", sapInvoice.Ugst);
-                                        command.Parameters.AddWithValue("@UGST_RCM", sapInvoice.UgstRcm);
-                                        command.Parameters.AddWithValue("@SGST_RCM", sapInvoice.SgstRcm);
-                                        command.Parameters.AddWithValue("@Invoice_Number", sapInvoice.Invoice);
-                                        command.Parameters.AddWithValue("@FG_Product_Code", sapInvoice.ZzproductId);
-                                        command.Parameters.AddWithValue("@FG_Product_Name", sapInvoice.ZzproductDesc);
-                                        command.Parameters.AddWithValue("@Ship_To_Party_MobileNumber", sapInvoice.Mobileno);
-                                        command.Parameters.AddWithValue("@Ship_To_Party_Region", sapInvoice.StpartyRegion);
-                                        command.Parameters.AddWithValue("@Ship_To_Party_Region_Desc", sapInvoice.StpartyRegiondesc);
+                                        //String segment = sapInvoice.Segment;
+                                        //segment = segment.TrimStart('0');
+                                        command.Parameters.AddWithValue("@Segment", row[0]);
+                                        command.Parameters.AddWithValue("@Region_Code", row[1]);
+                                        command.Parameters.AddWithValue("@Plant_Code", row[2]);
+                                        command.Parameters.AddWithValue("@Financial_Year", row[3]);
+                                        command.Parameters.AddWithValue("@GSTIN", row[4]);
+                                        command.Parameters.AddWithValue("@Document_Number", row[5]);
+                                        command.Parameters.AddWithValue("@Document_Date", row[6]);
+                                        command.Parameters.AddWithValue("@Document_Posting_Date", row[7]);
+                                        command.Parameters.AddWithValue("@Sales_Doc_Number", row[8]);
+                                        command.Parameters.AddWithValue("@Ship_To_Party_Number", row[9]);
+                                        command.Parameters.AddWithValue("@Ship_To_Party_Name", row[10]);
+                                        command.Parameters.AddWithValue("@Pin", row[11]);
+                                        command.Parameters.AddWithValue("@City", row[12]);
+                                        command.Parameters.AddWithValue("@Address_1", row[13]);
+                                        command.Parameters.AddWithValue("@Address_2", row[14]);
+                                        command.Parameters.AddWithValue("@Address_3", row[15]);
+                                        command.Parameters.AddWithValue("@Vendor_Code", row[16]);
+                                        command.Parameters.AddWithValue("@Vendor_Name", row[17]);
+                                        command.Parameters.AddWithValue("@Spu_Number", row[18]);
+                                        command.Parameters.AddWithValue("@CRM_Ticket_Number", row[19]);
+                                        command.Parameters.AddWithValue("@Machine_Status", row[20]);
+                                        command.Parameters.AddWithValue("@COGS", row[21]);
+                                        command.Parameters.AddWithValue("@Material_Code", row[22]);
+                                        command.Parameters.AddWithValue("@Material_Group", row[23]);
+                                        command.Parameters.AddWithValue("@Material_Description", row[24]);
+                                        command.Parameters.AddWithValue("@HSN", row[25]);
+                                        command.Parameters.AddWithValue("@Tax_Percentage", row[26]);
+                                        command.Parameters.AddWithValue("@Quantity", row[27]);
+                                        command.Parameters.AddWithValue("@UOM", row[28]);
+                                        command.Parameters.AddWithValue("@Spare_Value", row[29]);
+                                        command.Parameters.AddWithValue("@Currency", row[30]);
+                                        command.Parameters.AddWithValue("@Assignment_Date", row[31]);
+                                        command.Parameters.AddWithValue("@Tax_Code", row[32]);
+                                        command.Parameters.AddWithValue("@CGST_Percentage", row[33]);
+                                        command.Parameters.AddWithValue("@CGST_RCM", row[34]);
+                                        command.Parameters.AddWithValue("@CGST", row[35]);
+                                        command.Parameters.AddWithValue("@IGST_Percentage", row[36]);
+                                        command.Parameters.AddWithValue("@IGST", row[37]);
+                                        command.Parameters.AddWithValue("@Import_IGST", row[38]);
+                                        command.Parameters.AddWithValue("@IGST_RCM", row[39]);
+                                        command.Parameters.AddWithValue("@SGST_Percentage", row[40]);
+                                        command.Parameters.AddWithValue("@SGST", row[41]);
+                                        command.Parameters.AddWithValue("@UGST_Percentage", row[42]);
+                                        command.Parameters.AddWithValue("@UGST", row[43]);
+                                        command.Parameters.AddWithValue("@UGST_RCM", row[44]);
+                                        command.Parameters.AddWithValue("@SGST_RCM", row[45]);
+                                        command.Parameters.AddWithValue("@Invoice_Number", row[46]);
+                                        command.Parameters.AddWithValue("@FG_Product_Code", row[47]);
+                                        command.Parameters.AddWithValue("@FG_Product_Name", row[48]);
+                                        command.Parameters.AddWithValue("@Ship_To_Party_MobileNumber", row[49]);
+                                        command.Parameters.AddWithValue("@Ship_To_Party_Region", row[50]);
+                                        command.Parameters.AddWithValue("@Ship_To_Party_Region_Desc", row[51]);
 
-                                        if (!string.IsNullOrWhiteSpace(sapInvoice.Material))
-                                        {
+                                       
                                             command.ExecuteNonQuery();
-                                        }
+                                       
                                         //command.ExecuteNonQuery();
 
 
@@ -230,18 +246,19 @@ namespace WebApplication1.Controllers
                             responseCode.messageCode = "S";
                             responseCode.messageString = "Data successfully inserted from SAP to Database for invoice";
                         }
+                /*
                         catch (Exception ex)
                         {
                             responseCode.messageCode = "E";
                             responseCode.messageString = ex.Message;
                         }
-                    }
+                    */
 
+                
+                //string monthYear = convertToMonthYear(invoiceInput.StartDate);
+                string statusSqlLast = "UPDATE invoice_monthly_status SET Data_Sync_Flag = 'X' WHERE Month_Year = @Month_Year AND Segment = @Segment AND Region = @Region;";
 
-
-                    string statusSqlLast = "UPDATE invoice_monthly_status SET Data_Sync_Flag = 'X' WHERE Month_Year = @Month_Year AND Segment = @Segment AND Region = @Region;";
-
-
+                
                     using (var statuscommand = new MySqlCommand(statusSqlLast, _connection))
                     {
                         statuscommand.Parameters.AddWithValue("@Month_Year", monthYear);
@@ -251,7 +268,7 @@ namespace WebApplication1.Controllers
                         statuscommand.ExecuteNonQuery();
                     }
 
-                }
+                
 
             }
             catch (Exception ex)
@@ -267,9 +284,235 @@ namespace WebApplication1.Controllers
             return responseCode;
         }
 
+        public static DataTable ExecuteDataTable()
+
+        {
+            string host = "192.168.52.237";
+
+            int port = 21;
+
+            string username = "SPUINT";
+
+            string password = "$J$#2501j";
+            // string encodedPassword = Uri.EscapeDataString(password);
+
+            string remoteDirectory = @"/home/SPUINT/SPUINTDATA/data/";
+            string remoteFileName = "Feb.csv";
+
+            string localpath = "C:\\Users\\jayat\\source\\repos\\FranchiseeSPUInvoiceManageAPI\\WebApplication1\\SAPtoDB";
 
 
-        public static string convertToMonthYear(string inputDate)
+
+            byte[] fileContent;
+
+            StringBuilder result = new StringBuilder();
+
+            FtpWebRequest reqFTP;
+
+
+        //    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+ 
+            string ftpUrl = $"ftp://{host}:{port}/{remoteDirectory}{remoteFileName}";
+    
+            reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpUrl));
+
+            reqFTP.UseBinary = true;
+            reqFTP.UsePassive = true;
+         ///   reqFTP.EnableSsl = true;
+
+            reqFTP.Credentials = new NetworkCredential(username, password);
+
+            reqFTP.Method = WebRequestMethods.Ftp.ListDirectory;
+
+            List<string> ftpfiles = new List<string>();
+            WebResponse response = reqFTP.GetResponse();
+            DataTable dtCsv = new DataTable();
+            try
+
+            {
+
+                using (WebResponse listResponse = reqFTP.GetResponse())
+
+                {
+
+                    using (Stream listStream = listResponse.GetResponseStream())
+
+                    {
+
+                        using (StreamReader listReader = new StreamReader(listStream))
+
+                        {
+
+                            while (!listReader.EndOfStream)
+
+                            {
+
+                                string file = listReader.ReadLine();
+
+                                ftpfiles.Add(file);
+
+                            }
+
+
+
+                            foreach (var file in ftpfiles)
+
+                            {
+
+                                WebClient request = new WebClient();
+
+                                string url = "ftp://" + host+":"+port +"/"+ remoteDirectory + "/" + file;
+
+                                request.Credentials = new NetworkCredential(username, password);
+
+
+
+                                byte[] newFileData = request.DownloadData(url);
+
+                                var stream = new MemoryStream(newFileData);
+
+                                FileInfo fileInfoo = new FileInfo(localpath + file);
+
+                                if (fileInfoo.Exists)
+
+                                {
+
+                                    fileInfoo.Delete();
+
+                                }
+
+                                using (FileStream fileStream = new FileStream(localpath + file, FileMode.Create))
+
+                                {
+
+                                    stream.WriteTo(fileStream);
+
+                                }
+
+                                fileContent = stream.ToArray();
+
+                                // DataTable dtCsv = new DataTable();
+
+                                using (var reader = new StreamReader(System.IO.File.OpenRead(localpath + file)))
+
+                                {
+
+
+
+                                    string Fulltext;
+
+                                    while (!reader.EndOfStream)
+
+                                    {
+
+                                        Fulltext = reader.ReadToEnd().ToString(); //read full file text 
+
+                                        string[] rows = Fulltext.Split('\n'); //split full file text into rows 
+
+                                        for (int i = 0; i < rows.Count() - 1; i++)
+
+                                        {
+
+                                            string[] rowValues = rows[i].Split(','); //split each row with tab separator to get individual values
+
+                                            {
+
+                                                if (i == 0)
+
+                                                {
+
+                                                    for (int j = 0; j < rowValues.Count(); j++)
+
+                                                    {
+
+                                                        dtCsv.Columns.Add(j.ToString()).ToString().ToUpper(); //add headers 
+
+
+
+                                                    }
+
+                                                    DataRow dr = dtCsv.NewRow();
+
+                                                    for (int a = 0; a < rowValues.Count(); a++)
+
+                                                    {
+
+                                                        dr[a] = rowValues[a].ToString();
+
+                                                    }
+
+                                                    dtCsv.Rows.Add(dr); //add other rows 
+
+                                                }
+
+                                                else
+
+                                                {
+
+                                                    DataRow dr = dtCsv.NewRow();
+
+                                                    for (int k = 0; k < rowValues.Count(); k++)
+
+                                                    {
+
+                                                        dr[k] = rowValues[k].ToString();
+
+                                                    }
+
+                                                    dtCsv.Rows.Add(dr); //add other rows 
+
+                                                }
+
+                                            }
+
+                                        }
+
+                                    }
+
+
+
+                                }
+
+
+
+                            }
+
+                            listReader.Close();
+
+                        }
+
+                        listStream.Close();
+
+                    }
+
+                    listResponse.Close();
+
+                }
+                return dtCsv;
+
+            }
+
+            catch (WebException ex)
+
+            {
+               
+                Console.WriteLine($"An error occurred: {ex.Message}");
+                if (ex.Response is FtpWebResponse ftpResponse)
+                {
+                    Console.WriteLine($"FTP Status Code: {ftpResponse.StatusCode}");
+                }
+
+                if (ex.InnerException != null)
+                {
+                    Console.WriteLine($"Inner Exception: {ex.InnerException.Message}");
+                }
+                return dtCsv;
+
+            }
+        }
+
+
+            public static string convertToMonthYear(string inputDate)
         {
             try
             {
