@@ -40,7 +40,7 @@ namespace WebApplication1.Controllers
                 var result = new Dictionary<string, int>();
 
                 // Count Number of records synced from master table
-                string querySynced = "SELECT COUNT(Invoice_Number) FROM invoice_master_table WHERE Document_Date >= @firstdate AND Document_Date <= @lastdate AND Segment = @segment";
+                string querySynced = "SELECT COUNT(Document_Number) FROM invoice_master_table WHERE Document_Date >= @firstdate AND Document_Date <= @lastdate AND Segment = @segment";
                 MySqlCommand cmdSynced = new MySqlCommand(querySynced, _connection);
                 cmdSynced.Parameters.AddWithValue("@firstdate", $"{firstdate}");
                 cmdSynced.Parameters.AddWithValue("@lastdate", $"{lastdate}");
@@ -85,6 +85,8 @@ namespace WebApplication1.Controllers
                 _connection.Close();
             }
         }
-    }
 
-}
+        
+        }
+
+    }

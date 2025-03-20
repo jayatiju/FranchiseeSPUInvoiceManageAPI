@@ -55,8 +55,8 @@
     <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="Google.Protobuf, Version=3.26.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
-      <HintPath>..\packages\Google.Protobuf.3.26.1\lib\net45\Google.Protobuf.dll</HintPath>
+    <Reference Include="FluentFTP, Version=52.1.0.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentFTP.52.1.0\lib\net472\FluentFTP.dll</HintPath>
     </Reference>
     <Reference Include="itext.barcodes, Version=8.0.2.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\itext.8.0.2\lib\net461\itext.barcodes.dll</HintPath>
@@ -709,6 +709,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\DigitalSignatureCountStatusController.cs" />
     <Compile Include="Controllers\FileSearchController.cs" />
     <Compile Include="Controllers\InvoiceCountStatusController.cs" />
     <Compile Include="Controllers\GetInvoiceMasterController.cs" />
@@ -771,6 +772,9 @@
     </Compile>
     <Compile Include="Models\AdminDetails.cs" />
     <Compile Include="Models\CertificateEncryption.cs" />
+    <Compile Include="Models\FileSearchRequest.cs" />
+    <Compile Include="Models\FranchiseeDigiSigCount.cs" />
+    <Compile Include="Models\DbToFTPOutput.cs" />
     <Compile Include="Models\InvoiceMasterOutput.cs" />
     <Compile Include="Models\ConnectionString.cs" />
     <Compile Include="Models\CustomerMaster.cs" />
@@ -802,6 +806,7 @@
     <Compile Include="Models\vendorBulkPDFInput.cs" />
     <Compile Include="Models\vendorCounter.cs" />
     <Compile Include="Models\VendorDS.cs" />
+    <Compile Include="Models\VendorInput.cs" />
     <Compile Include="Models\VendorMaster.cs" />
     <Compile Include="Models\vendorSplitBulkPDFInput.cs" />
     <Compile Include="Models\VendorSplitDS.cs" />
@@ -1139,6 +1144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="SAPtoDB\" />
     <Folder Include="Views\CustomerDeactivation\" />
     <Folder Include="Views\CustomerMaster\" />
     <Folder Include="Views\Default\" />
@@ -1146,6 +1152,7 @@
     <Folder Include="Views\DemoInvoiceSap\" />
     <Folder Include="Views\DemoMaterialSap\" />
     <Folder Include="Views\DemoVendorSap\" />
+    <Folder Include="Views\FileSearchDirectory\" />
     <Folder Include="Views\FileSearch\" />
     <Folder Include="Views\GetAdminDetails\" />
     <Folder Include="Views\GetBulkPdf\" />
