@@ -46,9 +46,9 @@ namespace WebApplication1.Controllers
                 {
                     try
                     {
-
+                        
                         ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
-
+                        
                         client.ClientCredentials.UserName.UserName = "RFCUSER";
                         client.ClientCredentials.UserName.Password = "Init#1234";
 
@@ -156,6 +156,7 @@ namespace WebApplication1.Controllers
                             }
                             responseCode.messageCode = "S";
                             responseCode.messageString = "Data successfully inserted from SAP to Database for customer";
+                        
                         }
                     }
                     catch (Exception ex)
